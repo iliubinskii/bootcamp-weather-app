@@ -1,9 +1,31 @@
+<!--
+TODO
+- Add bootstrap CDN
+- Style the header navigation
+-->
+
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Weather</title>
+    <link rel="stylesheet" href="src/style.css" />
   </head>
-  <body></body>
+  <body>
+    <!-- Header navigation -->
+    <ul>
+      <li class="weather-report-link" data-weather-report-link>
+        Weather report
+      </li>
+      <li class="favorites-link" data-favorites-link>Favorites</li>
+    </ul>
+    <!-- Header navigation END -->
+
+    <!-- Page container -->
+    <div data-page-container></div>
+    <!-- Page container END -->
+
+    <script src="src/index.js" type="module"></script>
+  </body>
 </html>

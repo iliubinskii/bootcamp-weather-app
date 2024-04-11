@@ -3,7 +3,7 @@
     "checkJs": true,
     "module": "NodeNext",
     "noEmit": true,
-    "target": "ES2017"
+    "target": "ES2019"
   },
   "include": [
     "**/*.js",

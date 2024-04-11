@@ -1,4 +1,7 @@
-div {
-  color: "red";
-  background: "blue";
+.favorites-link {
+  cursor: pointer;
+}
+
+.weather-report-link {
+  cursor: pointer;
 }
