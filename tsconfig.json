@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
     "checkJs": true,
+    "lib": [
+      "DOM",
+      "ES2019"
+    ],
     "module": "NodeNext",
     "noEmit": true,
     "target": "ES2019"

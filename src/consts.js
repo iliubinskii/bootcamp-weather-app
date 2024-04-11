@@ -16,9 +16,14 @@ export const API_LANGUAGE = "en-us";
 
 export const DEFAULT_KEY = "215854";
 
+export const DEV_MODE = true;
+
 export const ELEMENT_DATA = {
+  currentConditionsContainer: "data-current-conditions-container",
+  dailyForcastContainer: "data-daily-forcast-container",
   favoritesLink: "data-favorites-link",
   pageContainer: "data-page-container",
+  searchForLocation: "data-search-for-location",
   weatherReportLink: "data-weather-report-link"
 };
 
@@ -30,4 +35,6 @@ export const ELEMENT_SELECTOR = Object.fromEntries(
   Object.entries(ELEMENT_DATA).map(([key, value]) => [key, `[${value}]`])
 );
 
-export const DEV_MODE = true;
+export const FORM_FIELD = {
+  q: "q"
+};

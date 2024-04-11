@@ -17,6 +17,9 @@ export async function currentConditionsQuery(key) {
     if (mockResponses.autocomplete.singleResult[0].Key === key)
       return Promise.resolve(mockResponses.currentConditions.minimal[0]);
 
+    if (mockResponses.autocomplete.singleResultAlt[0].Key === key)
+      return Promise.resolve(mockResponses.currentConditions.minimalAlt[0]);
+
     return Promise.reject(`Unknown key ${key}`);
   }
 

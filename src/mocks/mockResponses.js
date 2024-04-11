@@ -177,8 +177,28 @@ export const mockResponses = {
           "LocalizedName": "Tel Aviv"
         }
       }
-    ]
+    ],
     // Single result END
+
+    // Single result alt
+    singleResultAlt: [
+      {
+        "Version": 1,
+        "Key": "236186",
+        "Type": "City",
+        "Rank": 51,
+        "LocalizedName": "Timbuktu",
+        "Country": {
+          "ID": "ML",
+          "LocalizedName": "Mali"
+        },
+        "AdministrativeArea": {
+          "ID": "6",
+          "LocalizedName": "Tombouctou"
+        }
+      }
+    ]
+    // Single result alt END
   },
   // Autocomplete endpoint END
 
@@ -213,6 +233,36 @@ export const mockResponses = {
       }
     ],
     // Minimal END
+
+    // Minimal alt
+    minimalAlt: [
+      {
+        "LocalObservationDateTime": "2024-04-11T19:21:00+00:00",
+        "EpochTime": 1712863260,
+        "WeatherText": "Some clouds",
+        "WeatherIcon": 36,
+        "HasPrecipitation": false,
+        "PrecipitationType": null,
+        "IsDayTime": false,
+        "Temperature": {
+          "Metric": {
+            "Value": 37.3,
+            "Unit": "C",
+            "UnitType": 17
+          },
+          "Imperial": {
+            "Value": 99.0,
+            "Unit": "F",
+            "UnitType": 18
+          }
+        },
+        "MobileLink":
+          "http://www.accuweather.com/en/ml/timbuktu/236186/current-weather/236186?lang=en-us",
+        "Link":
+          "http://www.accuweather.com/en/ml/timbuktu/236186/current-weather/236186?lang=en-us"
+      }
+    ],
+    // Minimal alt END
 
     // With details
     withDetails: [
@@ -791,6 +841,181 @@ export const mockResponses = {
       ]
     },
     // Minimal END
+
+    // Minimal alt
+    minimalAlt: {
+      "Headline": {
+        "EffectiveDate": "2024-04-11T19:00:00+00:00",
+        "EffectiveEpochDate": 1712862000,
+        "Severity": 7,
+        "Text": "Warm Thursday night",
+        "Category": "heat",
+        "EndDate": "2024-04-12T07:00:00+00:00",
+        "EndEpochDate": 1712905200,
+        "MobileLink":
+          "http://www.accuweather.com/en/ml/timbuktu/236186/daily-weather-forecast/236186?lang=en-us",
+        "Link":
+          "http://www.accuweather.com/en/ml/timbuktu/236186/daily-weather-forecast/236186?lang=en-us"
+      },
+      "DailyForecasts": [
+        {
+          "Date": "2024-04-11T07:00:00+00:00",
+          "EpochDate": 1712818800,
+          "Temperature": {
+            "Minimum": {
+              "Value": 79.0,
+              "Unit": "F",
+              "UnitType": 18
+            },
+            "Maximum": {
+              "Value": 110.0,
+              "Unit": "F",
+              "UnitType": 18
+            }
+          },
+          "Day": {
+            "Icon": 30,
+            "IconPhrase": "Hot",
+            "HasPrecipitation": false
+          },
+          "Night": {
+            "Icon": 35,
+            "IconPhrase": "Partly cloudy",
+            "HasPrecipitation": false
+          },
+          "Sources": ["AccuWeather"],
+          "MobileLink":
+            "http://www.accuweather.com/en/ml/timbuktu/236186/daily-weather-forecast/236186?day=1&lang=en-us",
+          "Link":
+            "http://www.accuweather.com/en/ml/timbuktu/236186/daily-weather-forecast/236186?day=1&lang=en-us"
+        },
+        {
+          "Date": "2024-04-12T07:00:00+00:00",
+          "EpochDate": 1712905200,
+          "Temperature": {
+            "Minimum": {
+              "Value": 75.0,
+              "Unit": "F",
+              "UnitType": 18
+            },
+            "Maximum": {
+              "Value": 107.0,
+              "Unit": "F",
+              "UnitType": 18
+            }
+          },
+          "Day": {
+            "Icon": 5,
+            "IconPhrase": "Hazy sunshine",
+            "HasPrecipitation": false
+          },
+          "Night": {
+            "Icon": 33,
+            "IconPhrase": "Clear",
+            "HasPrecipitation": false
+          },
+          "Sources": ["AccuWeather"],
+          "MobileLink":
+            "http://www.accuweather.com/en/ml/timbuktu/236186/daily-weather-forecast/236186?day=2&lang=en-us",
+          "Link":
+            "http://www.accuweather.com/en/ml/timbuktu/236186/daily-weather-forecast/236186?day=2&lang=en-us"
+        },
+        {
+          "Date": "2024-04-13T07:00:00+00:00",
+          "EpochDate": 1712991600,
+          "Temperature": {
+            "Minimum": {
+              "Value": 65.0,
+              "Unit": "F",
+              "UnitType": 18
+            },
+            "Maximum": {
+              "Value": 100.0,
+              "Unit": "F",
+              "UnitType": 18
+            }
+          },
+          "Day": {
+            "Icon": 6,
+            "IconPhrase": "Mostly cloudy",
+            "HasPrecipitation": false
+          },
+          "Night": {
+            "Icon": 34,
+            "IconPhrase": "Mostly clear",
+            "HasPrecipitation": false
+          },
+          "Sources": ["AccuWeather"],
+          "MobileLink":
+            "http://www.accuweather.com/en/ml/timbuktu/236186/daily-weather-forecast/236186?day=3&lang=en-us",
+          "Link":
+            "http://www.accuweather.com/en/ml/timbuktu/236186/daily-weather-forecast/236186?day=3&lang=en-us"
+        },
+        {
+          "Date": "2024-04-14T07:00:00+00:00",
+          "EpochDate": 1713078000,
+          "Temperature": {
+            "Minimum": {
+              "Value": 65.0,
+              "Unit": "F",
+              "UnitType": 18
+            },
+            "Maximum": {
+              "Value": 95.0,
+              "Unit": "F",
+              "UnitType": 18
+            }
+          },
+          "Day": {
+            "Icon": 5,
+            "IconPhrase": "Hazy sunshine",
+            "HasPrecipitation": false
+          },
+          "Night": {
+            "Icon": 33,
+            "IconPhrase": "Clear",
+            "HasPrecipitation": false
+          },
+          "Sources": ["AccuWeather"],
+          "MobileLink":
+            "http://www.accuweather.com/en/ml/timbuktu/236186/daily-weather-forecast/236186?day=4&lang=en-us",
+          "Link":
+            "http://www.accuweather.com/en/ml/timbuktu/236186/daily-weather-forecast/236186?day=4&lang=en-us"
+        },
+        {
+          "Date": "2024-04-15T07:00:00+00:00",
+          "EpochDate": 1713164400,
+          "Temperature": {
+            "Minimum": {
+              "Value": 67.0,
+              "Unit": "F",
+              "UnitType": 18
+            },
+            "Maximum": {
+              "Value": 96.0,
+              "Unit": "F",
+              "UnitType": 18
+            }
+          },
+          "Day": {
+            "Icon": 3,
+            "IconPhrase": "Partly sunny",
+            "HasPrecipitation": false
+          },
+          "Night": {
+            "Icon": 33,
+            "IconPhrase": "Clear",
+            "HasPrecipitation": false
+          },
+          "Sources": ["AccuWeather"],
+          "MobileLink":
+            "http://www.accuweather.com/en/ml/timbuktu/236186/daily-weather-forecast/236186?day=5&lang=en-us",
+          "Link":
+            "http://www.accuweather.com/en/ml/timbuktu/236186/daily-weather-forecast/236186?day=5&lang=en-us"
+        }
+      ]
+    },
+    // Minimal alt END
 
     // With details+metric
     withDetailsMetric: {

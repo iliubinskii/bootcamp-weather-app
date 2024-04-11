@@ -8,7 +8,7 @@ const weatherReportLinkEl = document.querySelector(
   ELEMENT_SELECTOR.weatherReportLink
 );
 
-favoritesLinkEl.addEventListener("click", renderFavorites);
-weatherReportLinkEl.addEventListener("click", renderWeatherReport);
+favoritesLinkEl.addEventListener("click", () => renderFavorites());
+weatherReportLinkEl.addEventListener("click", () => renderWeatherReport());
 
 renderWeatherReport();

@@ -26,6 +26,9 @@ export async function dailyForcastQuery(key) {
     if (mockResponses.autocomplete.singleResult[0].Key === key)
       return Promise.resolve(mockResponses.daily5.minimal);
 
+    if (mockResponses.autocomplete.singleResultAlt[0].Key === key)
+      return Promise.resolve(mockResponses.daily5.minimalAlt);
+
     return Promise.reject(`Unknown key ${key}`);
   }
 

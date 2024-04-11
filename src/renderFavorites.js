@@ -1,4 +1,7 @@
-// TODO: Implement the renderFavorites function
+/*
+TODO
+- Implement the renderFavorites function
+*/
 
 import { ELEMENT_SELECTOR } from "./consts.js";
 
