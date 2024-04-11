@@ -13,9 +13,11 @@
   "author": "Ilia Liubinskii",
   "main": "index.js",
   "scripts": {
+    "format": "prettier --write \"**/*.css\" \"**/*.html\"",
     "install-deps": "npm install --strict-peer-deps",
     "install-dev-deps": "npm install --save-dev --strict-peer-deps",
     "lint": "eslint --fix --max-warnings=0 .",
+    "lint-style": "stylelint --fix --max-warnings=0 src/**/*.{css,scss}",
     "test": "jest",
     "type-check": "tsc --noEmit"
   },
