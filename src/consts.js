@@ -38,3 +38,7 @@ export const ELEMENT_SELECTOR = Object.fromEntries(
 export const FORM_FIELD = {
   q: "q"
 };
+
+export const LOCAL_STORAGE_KEY = {
+  favorites: "favorites"
+};

@@ -1,13 +1,13 @@
 module.exports = {
   parserOptions: {
     ecmaFeatures: { jsx: true },
-    ecmaVersion: 2019,
+    ecmaVersion: 2020,
     sourceType: "module"
   },
   env: {
     browser: true,
     commonjs: true,
-    es2019: true,
+    es2020: true,
     node: true
   },
   extends: ["eslint:recommended", "plugin:prettier/recommended"],
