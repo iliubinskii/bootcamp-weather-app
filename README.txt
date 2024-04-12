@@ -5,10 +5,10 @@
 1. Clone repository.
 2. Install dependencies by running `npm install`.
 
-## Creating PR
+## Contributions
 
-1. Create a new feature branch `feature/hyphened-branch-name`.
-2. Commit changes.
+1. Create a new feature branch `feature/<hyphened-branch-name>`.
+2. Make your changes.
 3. Format code by running `npm run format`.
 4. Check for type errors by running `npm run type-check`.
 5. Check for linting errors by running `npm run lint`.
