@@ -20,12 +20,11 @@ import { autocompleteQuery } from "./api/autocompleteQuery.js";
 import { currentConditionsQuery } from "./api/currentConditionsQuery.js";
 import { dailyForcastQuery } from "./api/dailyForcastQuery.js";
 
-export function renderWeatherReport(key = DEFAULT_KEY) {
-  const pageContainerEl = document.querySelector(
-    ELEMENT_SELECTOR.pageContainer
-  );
-
-  pageContainerEl.innerHTML = /*html*/ `
+/**
+ * @param {Element} container
+ */
+export function renderWeatherReport(container, key = DEFAULT_KEY) {
+  container.innerHTML = /*html*/ `
     <div>
       <!-- Search for location -->
       <form ${ELEMENT_DATA.searchForLocation}>
