@@ -16,9 +16,11 @@ import {
   ELEMENT_SELECTOR,
   FORM_FIELD
 } from "./consts.js";
-import { autocompleteQuery } from "./api/autocompleteQuery.js";
-import { currentConditionsQuery } from "./api/currentConditionsQuery.js";
-import { dailyForcastQuery } from "./api/dailyForcastQuery.js";
+import {
+  autocompleteQuery,
+  currentConditionsQuery,
+  dailyForcastsQuery
+} from "./api/index.js";
 import {
   assertDefined,
   assertHTMLFormElement,
@@ -42,9 +44,9 @@ export function renderWeatherReport(container, key = DEFAULT_KEY) {
       <div ${ELEMENT_DATA.currentConditionsContainer}></div>
       <!-- Current conditions END -->
 
-      <!-- Daily forcast -->
-      <div ${ELEMENT_DATA.dailyForcastContainer}></div>
-      <!-- Daily forcast END -->
+      <!-- Daily forcasts -->
+      <div ${ELEMENT_DATA.dailyForcastsContainer}></div>
+      <!-- Daily forcasts END -->
     </div>
   `;
 
@@ -84,8 +86,8 @@ function loadWeatherReport(key) {
     document.querySelector(ELEMENT_SELECTOR.currentConditionsContainer)
   );
 
-  const dailyForcastContainerEl = assertNotNull(
-    document.querySelector(ELEMENT_SELECTOR.dailyForcastContainer)
+  const dailyForcastsContainerEl = assertNotNull(
+    document.querySelector(ELEMENT_SELECTOR.dailyForcastsContainer)
   );
 
   currentConditionsQuery(key)
@@ -100,9 +102,9 @@ function loadWeatherReport(key) {
       console.error("Error in loadWeatherReport:", error);
     });
 
-  dailyForcastQuery(key)
+  dailyForcastsQuery(key)
     .then(response => {
-      dailyForcastContainerEl.innerHTML = /*html*/ `
+      dailyForcastsContainerEl.innerHTML = /*html*/ `
       <div>
         ${JSON.stringify(response)}
       </div>

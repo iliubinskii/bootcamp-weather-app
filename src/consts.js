@@ -20,7 +20,7 @@ export const DEV_MODE = true;
 
 export const ELEMENT_DATA = {
   currentConditionsContainer: "data-current-conditions-container",
-  dailyForcastContainer: "data-daily-forcast-container",
+  dailyForcastsContainer: "data-daily-forcasts-container",
   favoritesLink: "data-favorites-link",
   pageContainer: "data-page-container",
   searchForLocation: "data-search-for-location",

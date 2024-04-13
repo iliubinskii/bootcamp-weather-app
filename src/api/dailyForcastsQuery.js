@@ -6,7 +6,7 @@ import { assertDefined } from "../utils.js";
  * @param {string} key
  * @returns {Promise<typeof import("../types.js").DailyForecastType>}
  */
-export async function dailyForcastQuery(key) {
+export async function dailyForcastsQuery(key) {
   if (DEV_MODE) {
     const location = assertDefined(mockResponses.autocomplete.singleResult[0]);
 
