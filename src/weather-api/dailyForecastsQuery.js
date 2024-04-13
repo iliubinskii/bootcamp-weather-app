@@ -4,21 +4,30 @@ import { mockResponses } from "../mocks/index.js";
 
 /**
  * @param {string} key
+ * @param {boolean} metric
  * @returns {Promise<typeof import("../types.js").DailyForecastsType>}
  */
-export async function dailyForecastsQuery(key) {
+export async function dailyForecastsQuery(key, metric) {
   if (DEV_MODE) {
     const location = assertDefined(mockResponses.autocomplete.singleResult[0]);
 
     if (location.Key === key)
-      return Promise.resolve(mockResponses.daily5.minimal);
+      return Promise.resolve(
+        metric
+          ? mockResponses.daily5.minimalMetric
+          : mockResponses.daily5.minimal
+      );
 
     const locationAlt = assertDefined(
       mockResponses.autocomplete.singleResultAlt[0]
     );
 
     if (locationAlt.Key === key)
-      return Promise.resolve(mockResponses.daily5.minimalAlt);
+      return Promise.resolve(
+        metric
+          ? mockResponses.daily5.minimalMetricAlt
+          : mockResponses.daily5.minimalAlt
+      );
 
     return Promise.reject(`Unknown key ${key}`);
   }

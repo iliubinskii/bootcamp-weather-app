@@ -31,19 +31,15 @@ export function renderLocationsList(containerEl, locations, onSelectLocation) {
 
   locationElements.forEach(locationEl => {
     locationEl.addEventListener("click", () => {
-      try {
-        const key = assertNotNull(
-          locationEl.getAttribute(ELEMENT_DATA.locationKey)
-        );
+      const key = assertNotNull(
+        locationEl.getAttribute(ELEMENT_DATA.locationKey)
+      );
 
-        const location = assertDefined(
-          locations.find(location => location.Key === key)
-        );
+      const location = assertDefined(
+        locations.find(location => location.Key === key)
+      );
 
-        onSelectLocation(location);
-      } catch (error) {
-        console.error("Error in renderLocationsList:", error);
-      }
+      onSelectLocation(location);
     });
   });
 }

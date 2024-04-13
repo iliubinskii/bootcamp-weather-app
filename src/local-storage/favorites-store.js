@@ -4,7 +4,7 @@ export const { getFavoritesStore } = createSingleton();
 
 function createSingleton() {
   /**
-   * @type {typeof import("../types.js").LocationsType} locations
+   * @type {typeof import("../types.js").LocationsType}
    */
   let favorites;
 

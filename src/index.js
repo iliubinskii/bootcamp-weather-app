@@ -14,14 +14,14 @@ const weatherReportLinkEl = assertNotNull(
   document.querySelector(ELEMENT_SELECTOR.weatherReportLink)
 );
 
-favoritesLinkEl.addEventListener("click", () =>
+favoritesLinkEl.addEventListener("click", () => {
   renderFavorites(pageContainerEl, favorite => {
     renderWeatherReport(pageContainerEl, favorite);
-  })
-);
+  });
+});
 
-weatherReportLinkEl.addEventListener("click", () =>
-  renderWeatherReport(pageContainerEl)
-);
+weatherReportLinkEl.addEventListener("click", () => {
+  renderWeatherReport(pageContainerEl);
+});
 
 renderWeatherReport(pageContainerEl);

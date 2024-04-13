@@ -40,19 +40,15 @@ export function renderFavorites(containerEl, onSelectFavorite) {
 
   favoriteElements.forEach(favoriteEl => {
     favoriteEl.addEventListener("click", () => {
-      try {
-        const key = assertNotNull(
-          favoriteEl.getAttribute(ELEMENT_DATA.favoriteKey)
-        );
+      const key = assertNotNull(
+        favoriteEl.getAttribute(ELEMENT_DATA.favoriteKey)
+      );
 
-        const favorite = assertDefined(
-          favorites.find(favorite => favorite.Key === key)
-        );
+      const favorite = assertDefined(
+        favorites.find(favorite => favorite.Key === key)
+      );
 
-        onSelectFavorite(favorite);
-      } catch (error) {
-        console.error("Error in renderFavorites:", error);
-      }
+      onSelectFavorite(favorite);
     });
   });
 }

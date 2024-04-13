@@ -36,8 +36,10 @@ export const ELEMENT_DATA = {
   location: "data-location",
   locationKey: "data-location-key",
   pageContainer: "data-page-container",
+  reloadButton: "data-reload-button",
   searchForLocation: "data-search-for-location",
   toggleFavoriteButton: "data-toggle-favorite-button",
+  toggleMetricButton: "data-toggle-metric-button",
   weatherReportContainer: "data-weather-report-container",
   weatherReportLink: "data-weather-report-link"
 };
@@ -55,5 +57,6 @@ export const FORM_FIELD = {
 };
 
 export const LOCAL_STORAGE_KEY = {
+  appState: "app-state",
   favorites: "favorites"
 };

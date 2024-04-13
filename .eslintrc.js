@@ -46,6 +46,7 @@ module.exports = {
           "lang",
           "parens",
           "readonly",
+          "rerender",
           "typeof"
         ],
         "minLength": 3

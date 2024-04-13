@@ -3,6 +3,7 @@ TODO
 - Add loading spinner to the button
 - Disable submit button when input field is empty
 - Allow to reload the weather report for the same location
+- Add time string to the current conditions
 */
 
 import {
@@ -21,6 +22,7 @@ import {
   currentConditionsQuery,
   dailyForecastsQuery
 } from "../weather-api/index.js";
+import { getAppStateStore } from "../local-storage/index.js";
 import { renderCurrentConditions } from "./renderCurrentConditions.js";
 import { renderDailyForecasts } from "./renderDailyForecasts.js";
 import { renderLocationsList } from "./renderLocationsList.js";
@@ -68,38 +70,52 @@ export function renderWeatherReport(containerEl, location = DEFAULT_LOCATION) {
     const q = data.get(FORM_FIELD.q);
 
     if (typeof q === "string" && q.length)
-      autocompleteQuery(q).then(response => {
-        switch (response.length) {
-          case 0:
-            renderNoLocations(weatherReportContainerEl);
-            break;
+      autocompleteQuery(q)
+        .then(response => {
+          switch (response.length) {
+            case 0:
+              renderNoLocations(weatherReportContainerEl);
+              break;
 
-          case 1:
-            loadWeatherReport(
-              weatherReportContainerEl,
-              assertDefined(response[0])
-            );
-            break;
+            case 1:
+              loadWeatherReport(
+                weatherReportContainerEl,
+                assertDefined(response[0]),
+                rerender
+              );
+              break;
 
-          default:
-            renderLocationsList(weatherReportContainerEl, response, key => {
-              loadWeatherReport(weatherReportContainerEl, key);
-            });
-        }
-      });
+            default:
+              renderLocationsList(weatherReportContainerEl, response, key => {
+                loadWeatherReport(weatherReportContainerEl, key, rerender);
+              });
+          }
+        })
+        .catch(error => {
+          console.error("Error in renderWeatherReport:", error);
+        });
   });
 
-  loadWeatherReport(weatherReportContainerEl, location);
+  loadWeatherReport(weatherReportContainerEl, location, rerender);
+
+  function rerender() {
+    renderWeatherReport(containerEl, location);
+  }
 }
 
 /**
  * @param {Element} containerEl
  * @param {typeof import("../types.js").LocationType} location
+ * @param {() => void} rerender
  */
-function loadWeatherReport(containerEl, location) {
+function loadWeatherReport(containerEl, location, rerender) {
+  const { getAppState } = getAppStateStore();
+
+  const { metric } = getAppState();
+
   Promise.all([
     currentConditionsQuery(location.Key),
-    dailyForecastsQuery(location.Key)
+    dailyForecastsQuery(location.Key, metric)
   ])
     .then(([currentConditions, dailyForecasts]) => {
       containerEl.innerHTML = /*html*/ `
@@ -129,7 +145,8 @@ function loadWeatherReport(containerEl, location) {
       renderCurrentConditions(
         currentConditionsContainerEl,
         location,
-        currentConditions
+        currentConditions,
+        rerender
       );
 
       renderDailyForecasts(dailyForecastsContainerEl, dailyForecasts);

@@ -1,5 +1,12 @@
 /**
  * @type {{
+ *   metric: boolean
+ * }}
+ */
+export const AppStateType = { metric: false };
+
+/**
+ * @type {{
  *   Temperature: {
  *     Imperial: { Unit: string, Value: number },
  *     Metric: { Unit: string, Value: number }
