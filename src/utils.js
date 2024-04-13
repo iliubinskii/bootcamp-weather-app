@@ -10,6 +10,16 @@ export function assertDefined(value) {
 }
 
 /**
+ * @param {EventTarget} value
+ * @returns {HTMLFormElement}
+ */
+export function assertHTMLFormElement(value) {
+  if (value instanceof HTMLFormElement) return value;
+
+  throw Error("Expected value to be an instance of HTMLFormElement");
+}
+
+/**
  * @template T
  * @param {T | null} value
  * @returns {T}

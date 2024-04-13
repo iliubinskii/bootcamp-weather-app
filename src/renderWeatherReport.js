@@ -19,7 +19,11 @@ import {
 import { autocompleteQuery } from "./api/autocompleteQuery.js";
 import { currentConditionsQuery } from "./api/currentConditionsQuery.js";
 import { dailyForcastQuery } from "./api/dailyForcastQuery.js";
-import { assertDefined, assertNotNull } from "./utils.js";
+import {
+  assertDefined,
+  assertHTMLFormElement,
+  assertNotNull
+} from "./utils.js";
 
 /**
  * @param {Element} container
@@ -51,11 +55,7 @@ export function renderWeatherReport(container, key = DEFAULT_KEY) {
   searchForLocationEl.addEventListener("submit", event => {
     event.preventDefault();
 
-    /**
-     * @type {{ target: HTMLFormElement }}
-     */
-    // @ts-ignore
-    const { target } = event;
+    const target = assertHTMLFormElement(assertNotNull(event.target));
 
     const data = new FormData(target);
 
