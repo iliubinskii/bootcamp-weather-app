@@ -42,12 +42,11 @@ module.exports = {
           "jsx",
           "keyof",
           "lang",
-          "lf",
           "parens",
           "readonly",
           "typeof"
         ],
-        "minLength": 2
+        "minLength": 3
       }
     ]
   }

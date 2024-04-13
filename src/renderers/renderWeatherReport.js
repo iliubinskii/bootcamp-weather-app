@@ -77,7 +77,9 @@ export function renderWeatherReport(containerEl, key = DEFAULT_LOCATION_KEY) {
             break;
 
           default:
-            renderLocationsList(weatherReportContainerEl, response);
+            renderLocationsList(weatherReportContainerEl, response, key => {
+              loadWeatherReport(weatherReportContainerEl, key);
+            });
         }
       });
   });

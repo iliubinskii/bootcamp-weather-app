@@ -24,6 +24,8 @@ export const ELEMENT_DATA = {
   currentConditionsContainer: "data-current-conditions-container",
   dailyForecastsContainer: "data-daily-forecasts-container",
   favoritesLink: "data-favorites-link",
+  location: "data-location",
+  locationKey: "data-location-key",
   pageContainer: "data-page-container",
   searchForLocation: "data-search-for-location",
   weatherReportContainer: "data-weather-report-container",
