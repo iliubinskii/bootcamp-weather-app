@@ -1,14 +1,9 @@
-/*
-TODO
-- Implement the renderNoLocations function
-*/
-
 /**
  * @param {Element} containerEl
  */
 export function renderNoLocations(containerEl) {
   containerEl.innerHTML = /*html*/ `
-  <div>
+  <div class="alert alert-warning">
     No locations found
   </div>
 `;
