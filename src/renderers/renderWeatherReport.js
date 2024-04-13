@@ -20,7 +20,7 @@ import {
   autocompleteQuery,
   currentConditionsQuery,
   dailyForecastsQuery
-} from "../api/index.js";
+} from "../weather-api/index.js";
 import { renderCurrentConditions } from "./renderCurrentConditions.js";
 import { renderDailyForecasts } from "./renderDailyForecasts.js";
 import { renderLocationsList } from "./renderLocationsList.js";
