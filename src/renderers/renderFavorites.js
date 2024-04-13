@@ -6,14 +6,14 @@ TODO
 import { getFavoritesStore } from "../favorites-store.js";
 
 /**
- * @param {Element} container
+ * @param {Element} containerEl
  */
-export function renderFavorites(container) {
+export function renderFavorites(containerEl) {
   const { getFavorites } = getFavoritesStore();
 
   const favorites = getFavorites();
 
-  container.innerHTML = /*html*/ `
+  containerEl.innerHTML = /*html*/ `
     <div>
       ${JSON.stringify(favorites)}
     </div>

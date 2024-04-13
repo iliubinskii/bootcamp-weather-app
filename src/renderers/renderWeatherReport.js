@@ -25,12 +25,14 @@ import {
   currentConditionsQuery,
   dailyForecastsQuery
 } from "../api/index.js";
+import { renderCurrentConditions } from "./renderCurrentConditions.js";
+import { renderDailyForecasts } from "./renderDailyForecasts.js";
 
 /**
- * @param {Element} container
+ * @param {Element} containerEl
  */
-export function renderWeatherReport(container, key = DEFAULT_LOCATION_KEY) {
-  container.innerHTML = /*html*/ `
+export function renderWeatherReport(containerEl, key = DEFAULT_LOCATION_KEY) {
+  containerEl.innerHTML = /*html*/ `
     <div>
       <!-- Search for location -->
       <form ${ELEMENT_DATA.searchForLocation}>
@@ -91,11 +93,7 @@ function loadWeatherReport(key) {
 
   currentConditionsQuery(key)
     .then(response => {
-      currentConditionsContainerEl.innerHTML = /*html*/ `
-      <div>
-        ${JSON.stringify(response)}
-      </div>
-    `;
+      renderCurrentConditions(currentConditionsContainerEl, response);
     })
     .catch(error => {
       console.error("Error in loadWeatherReport:", error);
@@ -103,11 +101,7 @@ function loadWeatherReport(key) {
 
   dailyForecastsQuery(key)
     .then(response => {
-      dailyForecastsContainerEl.innerHTML = /*html*/ `
-      <div>
-        ${JSON.stringify(response)}
-      </div>
-    `;
+      renderDailyForecasts(dailyForecastsContainerEl, response);
     })
     .catch(error => {
       console.error("Error in loadWeatherReport:", error);
