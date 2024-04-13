@@ -1,8 +1,8 @@
 <!--
 TODO
-- Add bootstrap CDN
-- Style the header navigation
 - Remember last location
+- Add text font
+- What other information can be shown
 -->
 
 <!doctype html>
@@ -23,16 +23,34 @@ TODO
   </head>
   <body>
     <!-- Header navigation -->
-    <ul>
-      <li class="weather-report-link" data-weather-report-link>
-        Weather report
-      </li>
-      <li class="favorites-link" data-favorites-link>Favorites</li>
-    </ul>
+    <div class="bg-primary">
+      <div
+        class="app-max-width d-flex py-3 justify-content-between align-items-center text-white"
+      >
+        <h1 class="fs-2">Weather</h1>
+        <div class="d-flex gap-2">
+          <button class="btn btn-primary round-button">
+            <i
+              class="fa-solid fa-chart-simple fa-lg"
+              data-weather-report-link
+            ></i>
+          </button>
+          <button class="btn btn-primary round-button">
+            <i class="fa-solid fa-heart fa-lg" data-favorites-link></i>
+          </button>
+          <button class="btn btn-primary round-button">
+            <i class="fa-solid fa-lg">°F</i>
+          </button>
+        </div>
+      </div>
+    </div>
     <!-- Header navigation END -->
 
     <!-- Page container -->
-    <div data-page-container></div>
+    <div
+      class="app-max-width py-4 d-flex flex-column gap-4"
+      data-page-container
+    ></div>
     <!-- Page container END -->
 
     <script src="https://cdn.jsdelivr.net/npm/date-fns@3.6.0/cdn.min.js"></script>

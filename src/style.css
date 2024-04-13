@@ -1,7 +1,14 @@
-.favorites-link {
-  cursor: pointer;
+.app-max-width {
+  margin: 0 auto;
+  max-width: 720px;
 }
 
-.weather-report-link {
-  cursor: pointer;
+.round-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 100px;
+}
+
+.round-button .fa-solid {
+  letter-spacing: 0.1em;
 }

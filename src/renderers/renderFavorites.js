@@ -22,9 +22,9 @@ export function renderFavorites(containerEl, onSelectFavorite) {
         .map(favorite => {
           return /*html*/ `
             <button
-              class="list-group-item"
               ${ELEMENT_DATA.favorite}
               ${`${ELEMENT_DATA.favoriteKey}="${favorite.Key}"`}
+              class="list-group-item"
             >
               ${favorite.LocalizedName}, ${favorite.Country.LocalizedName}
             </button>

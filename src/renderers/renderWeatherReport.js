@@ -31,18 +31,23 @@ import { renderNoLocations } from "./renderNoLocations.js";
  */
 export function renderWeatherReport(containerEl, location = DEFAULT_LOCATION) {
   containerEl.innerHTML = /*html*/ `
-    <div>
-      <!-- Search for location -->
-      <form ${ELEMENT_DATA.searchForLocation}>
-        <input type="text" name="${FORM_FIELD.q}" placeholder="Search location" />
-        <button>Search</button>
-      </form>
-      <!-- Search for location END -->
+    <!-- Search for location -->
+    <form ${ELEMENT_DATA.searchForLocation} class="input-group">
+      <input
+        class="form-control"
+        name="${FORM_FIELD.q}"
+        type="text"
+        placeholder="Search location"
+      />
+      <button class="btn btn-outline-secondary px-3">
+        <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+      </button>
+    </form>
+    <!-- Search for location END -->
 
-      <!-- Weather report container -->
-      <div ${ELEMENT_DATA.weatherReportContainer}></div>
-      <!-- Weather report container END -->
-    </div>
+    <!-- Weather report container -->
+    <div ${ELEMENT_DATA.weatherReportContainer} class="d-flex flex-column gap-4"></div>
+    <!-- Weather report container END -->
   `;
 
   const searchForLocationEl = assertNotNull(
@@ -99,11 +104,17 @@ function loadWeatherReport(containerEl, location) {
     .then(([currentConditions, dailyForecasts]) => {
       containerEl.innerHTML = /*html*/ `
           <!-- Current conditions -->
-          <div ${ELEMENT_DATA.currentConditionsContainer}></div>
+          <div
+            ${ELEMENT_DATA.currentConditionsContainer}
+            class="d-flex flex-column gap-4"
+          ></div>
           <!-- Current conditions END -->
 
           <!-- Daily forecasts -->
-          <div ${ELEMENT_DATA.dailyForecastsContainer}></div>
+          <div
+            ${ELEMENT_DATA.dailyForecastsContainer}
+            class="d-flex flex-column gap-4"
+          ></div>
           <!-- Daily forecasts END -->
         `;
 

@@ -33,6 +33,14 @@ export function assertNotNull(value) {
 }
 
 /**
+ * @param {typeof import("./types.js").LocationType} location
+ * @returns {string}
+ */
+export function getLocationName(location) {
+  return `${location.LocalizedName}, ${location.Country.LocalizedName}`;
+}
+
+/**
  * @param {typeof import("./types.js").TemperatureType} temperature
  * @returns {string}
  */

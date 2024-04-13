@@ -1,5 +1,5 @@
 import { ELEMENT_DATA, ELEMENT_SELECTOR } from "../consts.js";
-import { assertDefined, assertNotNull } from "../utils.js";
+import { assertDefined, assertNotNull, getLocationName } from "../utils.js";
 
 /**
  * @param {Element} containerEl
@@ -13,11 +13,11 @@ export function renderLocationsList(containerEl, locations, onSelectLocation) {
         .map(location => {
           return /*html*/ `
             <button
-              class="list-group-item"
               ${ELEMENT_DATA.location}
               ${`${ELEMENT_DATA.locationKey}="${location.Key}"`}
+              class="list-group-item"
             >
-              ${location.LocalizedName}, ${location.Country.LocalizedName}
+              ${getLocationName(location)}
             </button>
           `;
         })

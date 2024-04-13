@@ -7,6 +7,7 @@ TODO:
 import { ELEMENT_DATA, ELEMENT_SELECTOR } from "../consts.js";
 import {
   assertNotNull,
+  getLocationName,
   getTemperatureText,
   getWeatherIconImg
 } from "../utils.js";
@@ -18,21 +19,26 @@ import { getFavoritesStore } from "../local-storage/favorites-store.js";
  * @param {typeof import("../types.js").CurrentConditionsType} conditions
  */
 export function renderCurrentConditions(containerEl, location, conditions) {
-  const { isFavorite, addToFavorites, removeFromFavorites } =
+  const { addToFavorites, isFavorite, removeFromFavorites } =
     getFavoritesStore();
 
   containerEl.innerHTML = /*html*/ `
-    <div class="d-flex align-items-center">
-      ${getWeatherIconImg(conditions.WeatherIcon, conditions.WeatherText)}
-      <div>
-        ${getTemperatureText(conditions.Temperature.Imperial)}
+    <div>
+      <div class="d-flex justify-content-between">
+        <h2 class="fs-3">
+          ${getWeatherIconImg(conditions.WeatherIcon, conditions.WeatherText)}
+          ${getLocationName(location)}
+        </h2>
+        <button
+          ${ELEMENT_DATA.toggleFavoriteButton}
+          class="btn btn-light round-button"
+        >
+          ${getFavoriteIcon()}
+        </button>
       </div>
-      <button
-        class="btn btn-primary"
-        ${ELEMENT_DATA.toggleFavoriteButton}
-      >
-        ${isFavorite(location.Key) ? "Remove from favorites" : "Add to favorites"}
-      </button>
+      <div>
+        Temperature: ${getTemperatureText(conditions.Temperature.Imperial)}
+      </div>
     </div>
   `;
 
@@ -43,5 +49,16 @@ export function renderCurrentConditions(containerEl, location, conditions) {
   toggleFavoriteButton.addEventListener("click", () => {
     if (isFavorite(location.Key)) removeFromFavorites(location.Key);
     else addToFavorites(location);
+
+    toggleFavoriteButton.innerHTML = getFavoriteIcon();
   });
+
+  /**
+   * @returns {string}
+   */
+  function getFavoriteIcon() {
+    return isFavorite(location.Key)
+      ? '<i class="fa-solid fa-heart fa-lg"></i>'
+      : '<i class="fa-regular fa-heart fa-lg"></i>';
+  }
 }
