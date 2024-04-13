@@ -1,12 +1,8 @@
 /*
 TODO
-- Implement the renderWeatherReport function
 - Add loading spinner to the button
-- Show weather icons based on icons numbers returned from the API
-- Add weather report
-- Use Tel Aviv as default (DEFAULT_LOCATION_KEY)
-- Deal with situation when multiple results are returned by autocompleteQuery
 - Disable submit button when input field is empty
+- Allow to reload the weather report for the same location
 */
 
 import {
@@ -27,6 +23,8 @@ import {
 } from "../api/index.js";
 import { renderCurrentConditions } from "./renderCurrentConditions.js";
 import { renderDailyForecasts } from "./renderDailyForecasts.js";
+import { renderLocationsList } from "./renderLocationsList.js";
+import { renderNoLocations } from "./renderNoLocations.js";
 
 /**
  * @param {Element} containerEl
@@ -41,18 +39,18 @@ export function renderWeatherReport(containerEl, key = DEFAULT_LOCATION_KEY) {
       </form>
       <!-- Search for location END -->
 
-      <!-- Current conditions -->
-      <div ${ELEMENT_DATA.currentConditionsContainer}></div>
-      <!-- Current conditions END -->
-
-      <!-- Daily forecasts -->
-      <div ${ELEMENT_DATA.dailyForecastsContainer}></div>
-      <!-- Daily forecasts END -->
+      <!-- Weather report container -->
+      <div ${ELEMENT_DATA.weatherReportContainer}></div>
+      <!-- Weather report container END -->
     </div>
   `;
 
   const searchForLocationEl = assertNotNull(
     document.querySelector(ELEMENT_SELECTOR.searchForLocation)
+  );
+
+  const weatherReportContainerEl = assertNotNull(
+    document.querySelector(ELEMENT_SELECTOR.weatherReportContainer)
   );
 
   searchForLocationEl.addEventListener("submit", event => {
@@ -66,42 +64,54 @@ export function renderWeatherReport(containerEl, key = DEFAULT_LOCATION_KEY) {
 
     if (typeof q === "string" && q.length)
       autocompleteQuery(q).then(response => {
-        if (response.length === 0) {
-          console.error("Error in renderWeatherReport: Not implemented");
-        } else if (response.length === 1) {
-          loadWeatherReport(assertDefined(response[0]).Key);
-        } else {
-          console.error("Error in renderWeatherReport: Not implemented");
+        switch (response.length) {
+          case 0:
+            renderNoLocations(weatherReportContainerEl);
+            break;
+
+          case 1:
+            loadWeatherReport(
+              weatherReportContainerEl,
+              assertDefined(response[0]).Key
+            );
+            break;
+
+          default:
+            renderLocationsList(weatherReportContainerEl, response);
         }
       });
   });
 
-  loadWeatherReport(key);
+  loadWeatherReport(weatherReportContainerEl, key);
 }
 
 /**
+ * @param {Element} containerEl
  * @param {string} key
  */
-function loadWeatherReport(key) {
-  const currentConditionsContainerEl = assertNotNull(
-    document.querySelector(ELEMENT_SELECTOR.currentConditionsContainer)
-  );
+function loadWeatherReport(containerEl, key) {
+  Promise.all([currentConditionsQuery(key), dailyForecastsQuery(key)])
+    .then(([currentConditions, dailyForecasts]) => {
+      containerEl.innerHTML = /*html*/ `
+          <!-- Current conditions -->
+          <div ${ELEMENT_DATA.currentConditionsContainer}></div>
+          <!-- Current conditions END -->
 
-  const dailyForecastsContainerEl = assertNotNull(
-    document.querySelector(ELEMENT_SELECTOR.dailyForecastsContainer)
-  );
+          <!-- Daily forecasts -->
+          <div ${ELEMENT_DATA.dailyForecastsContainer}></div>
+          <!-- Daily forecasts END -->
+        `;
 
-  currentConditionsQuery(key)
-    .then(response => {
-      renderCurrentConditions(currentConditionsContainerEl, response);
-    })
-    .catch(error => {
-      console.error("Error in loadWeatherReport:", error);
-    });
+      const currentConditionsContainerEl = assertNotNull(
+        document.querySelector(ELEMENT_SELECTOR.currentConditionsContainer)
+      );
 
-  dailyForecastsQuery(key)
-    .then(response => {
-      renderDailyForecasts(dailyForecastsContainerEl, response);
+      const dailyForecastsContainerEl = assertNotNull(
+        document.querySelector(ELEMENT_SELECTOR.dailyForecastsContainer)
+      );
+
+      renderCurrentConditions(currentConditionsContainerEl, currentConditions);
+      renderDailyForecasts(dailyForecastsContainerEl, dailyForecasts);
     })
     .catch(error => {
       console.error("Error in loadWeatherReport:", error);

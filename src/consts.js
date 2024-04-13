@@ -25,6 +25,7 @@ export const ELEMENT_DATA = {
   favoritesLink: "data-favorites-link",
   pageContainer: "data-page-container",
   searchForLocation: "data-search-for-location",
+  weatherReportContainer: "data-weather-report-container",
   weatherReportLink: "data-weather-report-link"
 };
 
