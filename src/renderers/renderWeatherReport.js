@@ -6,7 +6,7 @@ TODO
 */
 
 import {
-  DEFAULT_LOCATION_KEY,
+  DEFAULT_LOCATION,
   ELEMENT_DATA,
   ELEMENT_SELECTOR,
   FORM_FIELD
@@ -29,7 +29,7 @@ import { renderNoLocations } from "./renderNoLocations.js";
 /**
  * @param {Element} containerEl
  */
-export function renderWeatherReport(containerEl, key = DEFAULT_LOCATION_KEY) {
+export function renderWeatherReport(containerEl, location = DEFAULT_LOCATION) {
   containerEl.innerHTML = /*html*/ `
     <div>
       <!-- Search for location -->
@@ -46,11 +46,11 @@ export function renderWeatherReport(containerEl, key = DEFAULT_LOCATION_KEY) {
   `;
 
   const searchForLocationEl = assertNotNull(
-    document.querySelector(ELEMENT_SELECTOR.searchForLocation)
+    containerEl.querySelector(ELEMENT_SELECTOR.searchForLocation)
   );
 
   const weatherReportContainerEl = assertNotNull(
-    document.querySelector(ELEMENT_SELECTOR.weatherReportContainer)
+    containerEl.querySelector(ELEMENT_SELECTOR.weatherReportContainer)
   );
 
   searchForLocationEl.addEventListener("submit", event => {
@@ -72,7 +72,7 @@ export function renderWeatherReport(containerEl, key = DEFAULT_LOCATION_KEY) {
           case 1:
             loadWeatherReport(
               weatherReportContainerEl,
-              assertDefined(response[0]).Key
+              assertDefined(response[0])
             );
             break;
 
@@ -84,15 +84,18 @@ export function renderWeatherReport(containerEl, key = DEFAULT_LOCATION_KEY) {
       });
   });
 
-  loadWeatherReport(weatherReportContainerEl, key);
+  loadWeatherReport(weatherReportContainerEl, location);
 }
 
 /**
  * @param {Element} containerEl
- * @param {string} key
+ * @param {typeof import("../types.js").LocationType} location
  */
-function loadWeatherReport(containerEl, key) {
-  Promise.all([currentConditionsQuery(key), dailyForecastsQuery(key)])
+function loadWeatherReport(containerEl, location) {
+  Promise.all([
+    currentConditionsQuery(location.Key),
+    dailyForecastsQuery(location.Key)
+  ])
     .then(([currentConditions, dailyForecasts]) => {
       containerEl.innerHTML = /*html*/ `
           <!-- Current conditions -->
@@ -105,14 +108,19 @@ function loadWeatherReport(containerEl, key) {
         `;
 
       const currentConditionsContainerEl = assertNotNull(
-        document.querySelector(ELEMENT_SELECTOR.currentConditionsContainer)
+        containerEl.querySelector(ELEMENT_SELECTOR.currentConditionsContainer)
       );
 
       const dailyForecastsContainerEl = assertNotNull(
-        document.querySelector(ELEMENT_SELECTOR.dailyForecastsContainer)
+        containerEl.querySelector(ELEMENT_SELECTOR.dailyForecastsContainer)
       );
 
-      renderCurrentConditions(currentConditionsContainerEl, currentConditions);
+      renderCurrentConditions(
+        currentConditionsContainerEl,
+        location,
+        currentConditions
+      );
+
       renderDailyForecasts(dailyForecastsContainerEl, dailyForecasts);
     })
     .catch(error => {

@@ -34,6 +34,12 @@ function createSingleton() {
         getFavorites: () => favorites,
 
         /**
+         * @param {string} key
+         * @returns {boolean}
+         */
+        isFavorite: key => favorites.some(favorite => favorite.Key === key),
+
+        /**
          * @param {string} locationKey
          */
         removeFromFavorites: locationKey => {

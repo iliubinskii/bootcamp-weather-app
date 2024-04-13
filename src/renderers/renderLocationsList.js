@@ -1,14 +1,13 @@
 import { ELEMENT_DATA, ELEMENT_SELECTOR } from "../consts.js";
-import { assertNotNull } from "../utils.js";
+import { assertDefined, assertNotNull } from "../utils.js";
 
 /**
  * @param {Element} containerEl
  * @param {typeof import("../types.js").LocationsType} locations
- * @param {(key: string) => void} onSelectLocation
+ * @param {(location: typeof import("../types.js").LocationType) => void} onSelectLocation
  */
 export function renderLocationsList(containerEl, locations, onSelectLocation) {
-  try {
-    containerEl.innerHTML = /*html*/ `
+  containerEl.innerHTML = /*html*/ `
     <div class="list-group">
       ${locations
         .map(location => {
@@ -16,7 +15,7 @@ export function renderLocationsList(containerEl, locations, onSelectLocation) {
             <button
               class="list-group-item"
               ${ELEMENT_DATA.location}
-              ${ELEMENT_DATA.locationKey}="${location.Key}"
+              ${`${ELEMENT_DATA.locationKey}="${location.Key}"`}
             >
               ${location.LocalizedName}, ${location.Country.LocalizedName}
             </button>
@@ -26,20 +25,25 @@ export function renderLocationsList(containerEl, locations, onSelectLocation) {
     </div>
   `;
 
-    const locationElements = containerEl.querySelectorAll(
-      ELEMENT_SELECTOR.location
-    );
+  const locationElements = containerEl.querySelectorAll(
+    ELEMENT_SELECTOR.location
+  );
 
-    locationElements.forEach(locationEl => {
-      locationEl.addEventListener("click", () => {
+  locationElements.forEach(locationEl => {
+    locationEl.addEventListener("click", () => {
+      try {
         const key = assertNotNull(
           locationEl.getAttribute(ELEMENT_DATA.locationKey)
         );
 
-        onSelectLocation(key);
-      });
+        const location = assertDefined(
+          locations.find(location => location.Key === key)
+        );
+
+        onSelectLocation(location);
+      } catch (error) {
+        console.error("Error in renderLocationsList:", error);
+      }
     });
-  } catch (error) {
-    console.error("Error in renderLocationsList:", error);
-  }
+  });
 }

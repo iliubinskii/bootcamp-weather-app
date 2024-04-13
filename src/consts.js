@@ -16,7 +16,14 @@ export const API_KEY = "JNQ5epGgZUh6jeiNJUnJfGcrFnAuooJ3";
 
 export const API_LANGUAGE = "en-us";
 
-export const DEFAULT_LOCATION_KEY = "215854";
+/**
+ * @type {typeof import("./types.js").LocationType}}
+ */
+export const DEFAULT_LOCATION = {
+  Key: "215854",
+  LocalizedName: "Tel Aviv",
+  Country: { LocalizedName: "Israel" }
+};
 
 export const DEV_MODE = true;
 
@@ -28,6 +35,7 @@ export const ELEMENT_DATA = {
   locationKey: "data-location-key",
   pageContainer: "data-page-container",
   searchForLocation: "data-search-for-location",
+  toggleFavoriteButton: "data-toggle-favorite-button",
   weatherReportContainer: "data-weather-report-container",
   weatherReportLink: "data-weather-report-link"
 };

@@ -38,6 +38,7 @@ module.exports = {
           "aviv",
           "commonjs",
           "ecma",
+          "favicons",
           "globals",
           "jsx",
           "keyof",
