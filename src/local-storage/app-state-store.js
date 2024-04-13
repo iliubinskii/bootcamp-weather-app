@@ -1,4 +1,4 @@
-import { LOCAL_STORAGE_KEY } from "../consts.js";
+import { DEFAULT_LOCATION, LOCAL_STORAGE_KEY } from "../consts.js";
 
 export const { getAppStateStore } = createSingleton();
 
@@ -13,6 +13,15 @@ function createSingleton() {
       state = state ?? readFromLocalStorage();
 
       return {
+        /**
+         * @param {typeof import("../types.js").LocationType} location
+         */
+        setLocation: location => {
+          state.location = location;
+
+          writeToLocalStorage(state);
+        },
+
         /**
          * @param {boolean} metric
          */
@@ -40,10 +49,15 @@ function readFromLocalStorage() {
   if (typeof stringData === "string") {
     const jsonData = JSON.parse(stringData);
 
-    if (typeof jsonData === "object") return jsonData;
+    if (
+      typeof jsonData === "object" &&
+      typeof jsonData.location === "object" &&
+      typeof jsonData.metric === "boolean"
+    )
+      return jsonData;
   }
 
-  return { metric: true };
+  return { location: DEFAULT_LOCATION, metric: true };
 }
 
 /**

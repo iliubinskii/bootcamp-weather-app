@@ -1,6 +1,9 @@
 import { renderFavorites, renderWeatherReport } from "./renderers/index.js";
 import { ELEMENT_SELECTOR } from "./consts.js";
 import { assertNotNull } from "./utils.js";
+import { getAppStateStore } from "./local-storage/app-state-store.js";
+
+const { getAppState } = getAppStateStore();
 
 const favoritesLinkEl = assertNotNull(
   document.querySelector(ELEMENT_SELECTOR.favoritesLink)
@@ -14,14 +17,19 @@ const weatherReportLinkEl = assertNotNull(
   document.querySelector(ELEMENT_SELECTOR.weatherReportLink)
 );
 
-favoritesLinkEl.addEventListener("click", () => {
+favoritesLinkEl.addEventListener("click", openFavorites);
+
+weatherReportLinkEl.addEventListener("click", openWeatherReport);
+
+openWeatherReport();
+
+function openFavorites() {
   renderFavorites(pageContainerEl, favorite => {
     renderWeatherReport(pageContainerEl, favorite);
   });
-});
+}
+function openWeatherReport() {
+  const { location } = getAppState();
 
-weatherReportLinkEl.addEventListener("click", () => {
-  renderWeatherReport(pageContainerEl);
-});
-
-renderWeatherReport(pageContainerEl);
+  renderWeatherReport(pageContainerEl, location);
+}

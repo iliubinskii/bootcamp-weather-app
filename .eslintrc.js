@@ -47,6 +47,7 @@ module.exports = {
           "parens",
           "readonly",
           "rerender",
+          "subdomain",
           "typeof"
         ],
         "minLength": 3

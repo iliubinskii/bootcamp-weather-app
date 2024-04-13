@@ -4,12 +4,7 @@ TODO
 - Disable submit button when input field is empty
 */
 
-import {
-  DEFAULT_LOCATION,
-  ELEMENT_DATA,
-  ELEMENT_SELECTOR,
-  FORM_FIELD
-} from "../consts.js";
+import { ELEMENT_DATA, ELEMENT_SELECTOR, FORM_FIELD } from "../consts.js";
 import {
   assertDefined,
   assertHTMLFormElement,
@@ -28,8 +23,9 @@ import { renderNoLocations } from "./renderNoLocations.js";
 
 /**
  * @param {Element} containerEl
+ * @param {typeof import("../types.js").LocationType} location
  */
-export function renderWeatherReport(containerEl, location = DEFAULT_LOCATION) {
+export function renderWeatherReport(containerEl, location) {
   containerEl.innerHTML = /*html*/ `
     <!-- Search for location -->
     <form ${ELEMENT_DATA.searchForLocation} class="input-group">
@@ -107,9 +103,11 @@ export function renderWeatherReport(containerEl, location = DEFAULT_LOCATION) {
  * @param {() => void} rerender
  */
 function loadWeatherReport(containerEl, location, rerender) {
-  const { getAppState } = getAppStateStore();
+  const { getAppState, setLocation } = getAppStateStore();
 
   const { metric } = getAppState();
+
+  setLocation(location);
 
   Promise.all([
     currentConditionsQuery(location.Key),

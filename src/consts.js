@@ -1,6 +1,7 @@
 /*
 TODO
-- Do not store API key in the code. Use environment variables.
+- Do not store API key in the code. Use environment variable.
+- Do not use images from developer subdomain.
 */
 
 export const API_ENDPOINT = {
