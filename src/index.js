@@ -1,5 +1,5 @@
-import { ELEMENT_SELECTOR } from "./consts.js";
 import { renderFavorites, renderWeatherReport } from "./renderers/index.js";
+import { ELEMENT_SELECTOR } from "./consts.js";
 import { assertNotNull } from "./utils.js";
 
 const favoritesLinkEl = assertNotNull(

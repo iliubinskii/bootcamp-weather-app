@@ -1,6 +1,6 @@
 import { DEV_MODE } from "../consts.js";
-import { mockResponses } from "../mocks/index.js";
 import { assertDefined } from "../utils.js";
+import { mockResponses } from "../mocks/index.js";
 
 /**
  * @param {string} key

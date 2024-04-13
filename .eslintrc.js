@@ -11,6 +11,7 @@ module.exports = {
     node: true
   },
   extends: ["eslint:recommended", "plugin:prettier/recommended"],
+  plugins: ["sort-imports-requires"],
   rules: {
     "prettier/prettier": [
       "warn",
@@ -20,6 +21,8 @@ module.exports = {
         quoteProps: "preserve",
         trailingComma: "none"
       }
-    ]
+    ],
+    "sort-imports-requires/sort-imports": ["warn", { unsafeAutofix: true }],
+    "sort-imports-requires/sort-requires": ["warn", { unsafeAutofix: true }]
   }
 };

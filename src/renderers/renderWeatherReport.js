@@ -17,15 +17,15 @@ import {
   FORM_FIELD
 } from "../consts.js";
 import {
-  autocompleteQuery,
-  currentConditionsQuery,
-  dailyForcastsQuery
-} from "../api/index.js";
-import {
   assertDefined,
   assertHTMLFormElement,
   assertNotNull
 } from "../utils.js";
+import {
+  autocompleteQuery,
+  currentConditionsQuery,
+  dailyForcastsQuery
+} from "../api/index.js";
 
 /**
  * @param {Element} container
