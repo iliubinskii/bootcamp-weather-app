@@ -1,10 +1,10 @@
-import { LOCAL_STORAGE_KEY } from "./consts.js";
+import { LOCAL_STORAGE_KEY } from "../consts.js";
 
 export const { getFavoritesStore } = createSingleton();
 
 function createSingleton() {
   /**
-   * @type {typeof import("./types.js").LocationsType} locations
+   * @type {typeof import("../types.js").LocationsType} locations
    */
   let favorites;
 
@@ -14,7 +14,7 @@ function createSingleton() {
 
       return {
         /**
-         * @param {typeof import("./types.js").LocationType} location
+         * @param {typeof import("../types.js").LocationType} location
          */
         addToFavorites: location => {
           const index = favorites.findIndex(
@@ -29,7 +29,7 @@ function createSingleton() {
         },
 
         /**
-         * @returns {typeof import("./types.js").LocationsType}
+         * @returns {typeof import("../types.js").LocationsType}
          */
         getFavorites: () => favorites,
 
@@ -51,7 +51,7 @@ function createSingleton() {
 }
 
 /**
- * @returns {typeof import("./types.js").LocationsType}
+ * @returns {typeof import("../types.js").LocationsType}
  */
 function readFromLocalStorage() {
   const stringData = localStorage.getItem(LOCAL_STORAGE_KEY.favorites);
@@ -66,7 +66,7 @@ function readFromLocalStorage() {
 }
 
 /**
- * @param {typeof import("./types.js").LocationsType} locations
+ * @param {typeof import("../types.js").LocationsType} locations
  */
 function writeToLocalStorage(locations) {
   const stringData = JSON.stringify(locations);
