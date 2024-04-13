@@ -4,13 +4,13 @@ TODO
 - Add loading spinner to the button
 - Show weather icons based on icons numbers returned from the API
 - Add weather report
-- Use Tel Aviv as default (DEFAULT_KEY)
+- Use Tel Aviv as default (DEFAULT_LOCATION_KEY)
 - Deal with situation when multiple results are returned by autocompleteQuery
 - Disable submit button when input field is empty
 */
 
 import {
-  DEFAULT_KEY,
+  DEFAULT_LOCATION_KEY,
   ELEMENT_DATA,
   ELEMENT_SELECTOR,
   FORM_FIELD
@@ -29,7 +29,7 @@ import {
 /**
  * @param {Element} container
  */
-export function renderWeatherReport(container, key = DEFAULT_KEY) {
+export function renderWeatherReport(container, key = DEFAULT_LOCATION_KEY) {
   container.innerHTML = /*html*/ `
     <div>
       <!-- Search for location -->

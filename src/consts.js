@@ -15,7 +15,7 @@ export const API_KEY = "JNQ5epGgZUh6jeiNJUnJfGcrFnAuooJ3";
 
 export const API_LANGUAGE = "en-us";
 
-export const DEFAULT_KEY = "215854";
+export const DEFAULT_LOCATION_KEY = "215854";
 
 export const DEV_MODE = true;
 
