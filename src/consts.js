@@ -30,6 +30,8 @@ export const DEV_MODE = true;
 export const ELEMENT_DATA = {
   currentConditionsContainer: "data-current-conditions-container",
   dailyForecastsContainer: "data-daily-forecasts-container",
+  favorite: "data-favorite",
+  favoriteKey: "data-favorite-key",
   favoritesLink: "data-favorites-link",
   location: "data-location",
   locationKey: "data-location-key",

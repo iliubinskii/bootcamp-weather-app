@@ -15,7 +15,9 @@ const weatherReportLinkEl = assertNotNull(
 );
 
 favoritesLinkEl.addEventListener("click", () =>
-  renderFavorites(pageContainerEl)
+  renderFavorites(pageContainerEl, favorite => {
+    renderWeatherReport(pageContainerEl, favorite);
+  })
 );
 
 weatherReportLinkEl.addEventListener("click", () =>
