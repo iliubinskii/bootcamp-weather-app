@@ -35,12 +35,20 @@ export function renderCurrentConditions(
 
   containerEl.innerHTML = /*html*/ `
     <div>
-      <div class="d-flex justify-content-between">
-        <h2 class="fs-3">
-          ${getWeatherIconImg(conditions.WeatherIcon, conditions.WeatherText)}
-          ${getLocationName(location)}
-        </h2>
-        <div class="d-flex gap-2">
+      <div class="d-flex flex-column flex-sm-row justify-content-between gap-3">
+        <div>
+          <h2 class="fs-3">
+            ${getWeatherIconImg(conditions.WeatherIcon, conditions.WeatherText)}
+            ${getLocationName(location)}
+          </h2>
+          <div>
+            Temperature: ${temperature}
+          </div>
+          <div>
+            Time: ${time}
+          </div>
+        </div>
+        <div class="d-flex justify-content-around gap-2">
           <button
             ${ELEMENT_DATA.toggleFavoriteButton}
             class="btn btn-light round-button"
@@ -60,12 +68,6 @@ export function renderCurrentConditions(
             <i class="fa-solid fa-rotate-right fa-lg"></i>
           </button>
         </div>
-      </div>
-      <div>
-        Temperature: ${temperature}
-      </div>
-      <div>
-        Time: ${time}
       </div>
     </div>
   `;

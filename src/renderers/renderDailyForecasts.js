@@ -11,7 +11,7 @@ export function renderDailyForecasts(containerEl, forecasts) {
         const date = dateFns.format(forecast.Date, "eee, d MMM");
 
         return /*html*/ `
-          <div class="col">
+          <div class="col-12 col-sm-4 col-md">
             <div class="card">
               <div class="card-header bg-secondary text-white">
                 ${date}

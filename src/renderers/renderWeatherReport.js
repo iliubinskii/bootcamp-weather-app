@@ -2,8 +2,6 @@
 TODO
 - Add loading spinner to the button
 - Disable submit button when input field is empty
-- Allow to reload the weather report for the same location
-- Add time string to the current conditions
 */
 
 import {
