@@ -11,6 +11,7 @@ module.exports = {
     node: true
   },
   extends: ["eslint:recommended", "plugin:prettier/recommended"],
+  globals: { dateFns: "readonly" },
   plugins: ["sort-imports-requires", "spellcheck"],
   rules: {
     "prettier/prettier": [
@@ -37,11 +38,13 @@ module.exports = {
           "aviv",
           "commonjs",
           "ecma",
+          "globals",
           "jsx",
           "keyof",
           "lang",
           "lf",
           "parens",
+          "readonly",
           "typeof"
         ],
         "minLength": 2

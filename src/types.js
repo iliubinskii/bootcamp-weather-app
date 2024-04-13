@@ -67,3 +67,11 @@ export const LocationType = {
  * @type {Array<LocationType>}
  */
 export const LocationsType = [];
+
+/**
+ * @type {{
+ *   Unit: string,
+ *   Value: number
+ * }}
+ */
+export const TemperatureType = { Unit: "", Value: 0 };

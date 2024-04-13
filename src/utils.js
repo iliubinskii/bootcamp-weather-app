@@ -1,3 +1,5 @@
+import { API_ENDPOINT } from "./consts.js";
+
 /**
  * @template T
  * @param {T | undefined} value
@@ -28,4 +30,27 @@ export function assertNotNull(value) {
   if (value === null) throw Error("Value is null");
 
   return value;
+}
+
+/**
+ * @param {typeof import("./types.js").TemperatureType} temperature
+ * @returns {string}
+ */
+export function getTemperatureText(temperature) {
+  return `${temperature.Value}°${temperature.Unit}`;
+}
+
+/**
+ * @param {number} iconId
+ * @param {string} altText
+ * @returns {string}
+ */
+export function getWeatherIconImg(iconId, altText) {
+  const iconId2 = iconId.toString().padStart(2, "0");
+
+  const iconFilename = `${iconId2}-s.png`;
+
+  return /*html*/ `
+    <img src="${API_ENDPOINT.files}/${iconFilename}" alt="${altText}" />
+  `;
 }
