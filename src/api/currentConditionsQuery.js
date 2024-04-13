@@ -4,14 +4,7 @@ import { assertDefined } from "../utils.js";
 
 /**
  * @param {string} key
- * @returns {Promise<{
- *   Temperature: {
- *     Imperial: { Unit: string, Value: number },
- *     Metric: { Unit: string, Value: number }
- *   },
- *   WeatherIcon: number,
- *   WeatherText: string
- * }>}
+ * @returns {Promise<typeof import("../types.js").CurrentConditionsType>}
  */
 export async function currentConditionsQuery(key) {
   if (DEV_MODE) {

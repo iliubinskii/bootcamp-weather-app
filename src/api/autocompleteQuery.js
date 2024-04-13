@@ -3,11 +3,7 @@ import { mockResponses } from "../mocks/index.js";
 
 /**
  * @param {string} q
- * @returns {Promise<Array<{
- *   Country: { LocalizedName: string },
- *   Key: string,
- *   LocalizedName: string
- * }>>}
+ * @returns {Promise<typeof import("../types.js").LocationsType>}
  */
 export async function autocompleteQuery(q) {
   if (DEV_MODE) {

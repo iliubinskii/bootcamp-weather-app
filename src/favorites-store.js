@@ -4,11 +4,7 @@ export const { getFavoritesStore } = createSingleton();
 
 function createSingleton() {
   /**
-   * @type {Array<{
-   *   Country: { LocalizedName: string },
-   *   Key: string,
-   *   LocalizedName: string
-   * }>} locations
+   * @type {typeof import("./types.js").LocationsType} locations
    */
   let favorites;
 
@@ -18,11 +14,7 @@ function createSingleton() {
 
       return {
         /**
-         * @param {{
-         *   Country: { LocalizedName: string },
-         *   Key: string,
-         *   LocalizedName: string
-         * }} location
+         * @param {typeof import("./types.js").LocationType} location
          */
         addToFavorites: location => {
           const index = favorites.findIndex(
@@ -37,11 +29,7 @@ function createSingleton() {
         },
 
         /**
-         * @returns {Array<{
-         *   Country: { LocalizedName: string },
-         *   Key: string,
-         *   LocalizedName: string
-         * }>}
+         * @returns {typeof import("./types.js").LocationsType}
          */
         getFavorites: () => favorites,
 
@@ -63,11 +51,7 @@ function createSingleton() {
 }
 
 /**
- * @returns {Array<{
- *   Country: { LocalizedName: string },
- *   Key: string,
- *   LocalizedName: string
- * }>}
+ * @returns {typeof import("./types.js").LocationsType}
  */
 function readFromLocalStorage() {
   const stringData = localStorage.getItem(LOCAL_STORAGE_KEY.favorites);
@@ -82,11 +66,7 @@ function readFromLocalStorage() {
 }
 
 /**
- * @param {Array<{
- *   Country: { LocalizedName: string },
- *   Key: string,
- *   LocalizedName: string
- * }>} locations
+ * @param {typeof import("./types.js").LocationsType} locations
  */
 function writeToLocalStorage(locations) {
   const stringData = JSON.stringify(locations);

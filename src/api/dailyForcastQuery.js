@@ -4,23 +4,7 @@ import { assertDefined } from "../utils.js";
 
 /**
  * @param {string} key
- * @returns {Promise<{
- *   DailyForecasts: Array<{
- *     Date: string,
- *     Day: {
- *       Icon: number,
- *       IconPhrase: string
- *     },
- *     Night: {
- *       Icon: number,
- *       IconPhrase: string
- *     },
- *     Temperature: {
- *       Minimum: { Unit: string, Value: number },
- *       Maximum: { Unit: string, Value: number }
- *     }
- *   }>
- * }>}
+ * @returns {Promise<typeof import("../types.js").DailyForecastType>}
  */
 export async function dailyForcastQuery(key) {
   if (DEV_MODE) {
