@@ -4,7 +4,6 @@ TODO
 - Add loading spinner to the button
 - Show weather icons based on icons numbers returned from the API
 - Add weather report
-- Add weather forecast
 - Use Tel Aviv as default (DEFAULT_KEY)
 - Deal with situation when multiple results are returned by autocompleteQuery
 - Disable submit button when input field is empty
@@ -24,7 +23,7 @@ import {
 import {
   autocompleteQuery,
   currentConditionsQuery,
-  dailyForcastsQuery
+  dailyForecastsQuery
 } from "../api/index.js";
 
 /**
@@ -44,9 +43,9 @@ export function renderWeatherReport(container, key = DEFAULT_KEY) {
       <div ${ELEMENT_DATA.currentConditionsContainer}></div>
       <!-- Current conditions END -->
 
-      <!-- Daily forcasts -->
-      <div ${ELEMENT_DATA.dailyForcastsContainer}></div>
-      <!-- Daily forcasts END -->
+      <!-- Daily forecasts -->
+      <div ${ELEMENT_DATA.dailyForecastsContainer}></div>
+      <!-- Daily forecasts END -->
     </div>
   `;
 
@@ -86,8 +85,8 @@ function loadWeatherReport(key) {
     document.querySelector(ELEMENT_SELECTOR.currentConditionsContainer)
   );
 
-  const dailyForcastsContainerEl = assertNotNull(
-    document.querySelector(ELEMENT_SELECTOR.dailyForcastsContainer)
+  const dailyForecastsContainerEl = assertNotNull(
+    document.querySelector(ELEMENT_SELECTOR.dailyForecastsContainer)
   );
 
   currentConditionsQuery(key)
@@ -102,9 +101,9 @@ function loadWeatherReport(key) {
       console.error("Error in loadWeatherReport:", error);
     });
 
-  dailyForcastsQuery(key)
+  dailyForecastsQuery(key)
     .then(response => {
-      dailyForcastsContainerEl.innerHTML = /*html*/ `
+      dailyForecastsContainerEl.innerHTML = /*html*/ `
       <div>
         ${JSON.stringify(response)}
       </div>

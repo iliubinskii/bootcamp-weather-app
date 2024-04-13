@@ -10,6 +10,7 @@ export const API_ENDPOINT = {
   daily5: "https://dataservice.accuweather.com/forecasts/v1/daily/5day"
 };
 
+// eslint-disable-next-line spellcheck/spell-checker -- Ok
 export const API_KEY = "JNQ5epGgZUh6jeiNJUnJfGcrFnAuooJ3";
 
 export const API_LANGUAGE = "en-us";
@@ -20,7 +21,7 @@ export const DEV_MODE = true;
 
 export const ELEMENT_DATA = {
   currentConditionsContainer: "data-current-conditions-container",
-  dailyForcastsContainer: "data-daily-forcasts-container",
+  dailyForecastsContainer: "data-daily-forecasts-container",
   favoritesLink: "data-favorites-link",
   pageContainer: "data-page-container",
   searchForLocation: "data-search-for-location",

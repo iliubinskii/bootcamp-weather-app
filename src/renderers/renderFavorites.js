@@ -11,11 +11,11 @@ import { getFavoritesStore } from "../favorites-store.js";
 export function renderFavorites(container) {
   const { getFavorites } = getFavoritesStore();
 
-  const favoties = getFavorites();
+  const favorites = getFavorites();
 
   container.innerHTML = /*html*/ `
     <div>
-      ${JSON.stringify(favoties)}
+      ${JSON.stringify(favorites)}
     </div>
   `;
 }

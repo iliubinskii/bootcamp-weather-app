@@ -1,3 +1,5 @@
+/* eslint-disable spellcheck/spell-checker -- Ok */
+
 export const mockResponses = {
   // Autocomplete endpoint
   autocomplete: {

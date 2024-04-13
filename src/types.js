@@ -36,7 +36,7 @@ export const CurrentConditionsType = {
  *   }>
  * }}
  */
-export const DailyForecastType = {
+export const DailyForecastsType = {
   DailyForecasts: [
     {
       Date: "",

@@ -4,9 +4,9 @@ import { mockResponses } from "../mocks/index.js";
 
 /**
  * @param {string} key
- * @returns {Promise<typeof import("../types.js").DailyForecastType>}
+ * @returns {Promise<typeof import("../types.js").DailyForecastsType>}
  */
-export async function dailyForcastsQuery(key) {
+export async function dailyForecastsQuery(key) {
   if (DEV_MODE) {
     const location = assertDefined(mockResponses.autocomplete.singleResult[0]);
 

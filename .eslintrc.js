@@ -11,7 +11,7 @@ module.exports = {
     node: true
   },
   extends: ["eslint:recommended", "plugin:prettier/recommended"],
-  plugins: ["sort-imports-requires"],
+  plugins: ["sort-imports-requires", "spellcheck"],
   rules: {
     "prettier/prettier": [
       "warn",
@@ -23,6 +23,29 @@ module.exports = {
       }
     ],
     "sort-imports-requires/sort-imports": ["warn", { unsafeAutofix: true }],
-    "sort-imports-requires/sort-requires": ["warn", { unsafeAutofix: true }]
+    "sort-imports-requires/sort-requires": ["warn", { unsafeAutofix: true }],
+    "spellcheck/spell-checker": [
+      "warn",
+      {
+        "comments": true,
+        "strings": true,
+        "identifiers": true,
+        "templates": true,
+        "lang": "en_US",
+        "skipWords": [
+          "autofix",
+          "aviv",
+          "commonjs",
+          "ecma",
+          "jsx",
+          "keyof",
+          "lang",
+          "lf",
+          "parens",
+          "typeof"
+        ],
+        "minLength": 2
+      }
+    ]
   }
 };

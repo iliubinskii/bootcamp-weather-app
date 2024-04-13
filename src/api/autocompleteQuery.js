@@ -1,4 +1,5 @@
 import { DEV_MODE } from "../consts.js";
+import { assertDefined } from "../utils.js";
 import { mockResponses } from "../mocks/index.js";
 
 /**
@@ -6,17 +7,26 @@ import { mockResponses } from "../mocks/index.js";
  * @returns {Promise<typeof import("../types.js").LocationsType>}
  */
 export async function autocompleteQuery(q) {
-  if (DEV_MODE) {
-    if (q === "Tel")
-      return Promise.resolve(mockResponses.autocomplete.multipleResults);
+  if (q === "") return [];
 
-    if (q === "Tel Aviv")
+  if (DEV_MODE) {
+    const location = assertDefined(mockResponses.autocomplete.singleResult[0]);
+
+    if (q === location.LocalizedName)
       return Promise.resolve(mockResponses.autocomplete.singleResult);
 
-    if (q === "Timbuktu")
+    const locationAlt = assertDefined(
+      mockResponses.autocomplete.singleResultAlt[0]
+    );
+
+    if (q === locationAlt.LocalizedName)
       return Promise.resolve(mockResponses.autocomplete.singleResultAlt);
 
-    return Promise.resolve(mockResponses.autocomplete.noResults);
+    return Promise.resolve(
+      mockResponses.autocomplete.multipleResults.filter(({ LocalizedName }) =>
+        LocalizedName.startsWith(q)
+      )
+    );
   }
 
   /*
