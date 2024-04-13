@@ -15,17 +15,17 @@ import {
   ELEMENT_DATA,
   ELEMENT_SELECTOR,
   FORM_FIELD
-} from "./consts.js";
+} from "../consts.js";
 import {
   autocompleteQuery,
   currentConditionsQuery,
   dailyForcastsQuery
-} from "./api/index.js";
+} from "../api/index.js";
 import {
   assertDefined,
   assertHTMLFormElement,
   assertNotNull
-} from "./utils.js";
+} from "../utils.js";
 
 /**
  * @param {Element} container

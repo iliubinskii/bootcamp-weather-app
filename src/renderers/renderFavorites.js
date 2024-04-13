@@ -3,7 +3,7 @@ TODO
 - Implement the renderFavorites function
 */
 
-import { getFavoritesStore } from "./favorites-store.js";
+import { getFavoritesStore } from "../favorites-store.js";
 
 /**
  * @param {Element} container

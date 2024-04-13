@@ -1,6 +1,5 @@
 import { ELEMENT_SELECTOR } from "./consts.js";
-import { renderFavorites } from "./renderFavorites.js";
-import { renderWeatherReport } from "./renderWeatherReport.js";
+import { renderFavorites, renderWeatherReport } from "./renderers/index.js";
 import { assertNotNull } from "./utils.js";
 
 const favoritesLinkEl = assertNotNull(
@@ -18,6 +17,7 @@ const weatherReportLinkEl = assertNotNull(
 favoritesLinkEl.addEventListener("click", () =>
   renderFavorites(pageContainerEl)
 );
+
 weatherReportLinkEl.addEventListener("click", () =>
   renderWeatherReport(pageContainerEl)
 );
