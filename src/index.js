@@ -1,13 +1,18 @@
 import { ELEMENT_SELECTOR } from "./consts.js";
 import { renderFavorites } from "./renderFavorites.js";
 import { renderWeatherReport } from "./renderWeatherReport.js";
+import { assertNotNull } from "./utils.js";
 
-const favoritesLinkEl = document.querySelector(ELEMENT_SELECTOR.favoritesLink);
+const favoritesLinkEl = assertNotNull(
+  document.querySelector(ELEMENT_SELECTOR.favoritesLink)
+);
 
-const pageContainerEl = document.querySelector(ELEMENT_SELECTOR.pageContainer);
+const pageContainerEl = assertNotNull(
+  document.querySelector(ELEMENT_SELECTOR.pageContainer)
+);
 
-const weatherReportLinkEl = document.querySelector(
-  ELEMENT_SELECTOR.weatherReportLink
+const weatherReportLinkEl = assertNotNull(
+  document.querySelector(ELEMENT_SELECTOR.weatherReportLink)
 );
 
 favoritesLinkEl.addEventListener("click", () =>

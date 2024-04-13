@@ -1,5 +1,6 @@
 import { DEV_MODE } from "../consts.js";
 import { mockResponses } from "../mocks/index.js";
+import { assertDefined } from "../utils.js";
 
 /**
  * @param {string} key
@@ -23,10 +24,16 @@ import { mockResponses } from "../mocks/index.js";
  */
 export async function dailyForcastQuery(key) {
   if (DEV_MODE) {
-    if (mockResponses.autocomplete.singleResult[0].Key === key)
+    const location = assertDefined(mockResponses.autocomplete.singleResult[0]);
+
+    if (location.Key === key)
       return Promise.resolve(mockResponses.daily5.minimal);
 
-    if (mockResponses.autocomplete.singleResultAlt[0].Key === key)
+    const locationAlt = assertDefined(
+      mockResponses.autocomplete.singleResultAlt[0]
+    );
+
+    if (locationAlt.Key === key)
       return Promise.resolve(mockResponses.daily5.minimalAlt);
 
     return Promise.reject(`Unknown key ${key}`);

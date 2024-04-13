@@ -1,5 +1,6 @@
 import { DEV_MODE } from "../consts.js";
 import { mockResponses } from "../mocks/index.js";
+import { assertDefined } from "../utils.js";
 
 /**
  * @param {string} key
@@ -14,11 +15,21 @@ import { mockResponses } from "../mocks/index.js";
  */
 export async function currentConditionsQuery(key) {
   if (DEV_MODE) {
-    if (mockResponses.autocomplete.singleResult[0].Key === key)
-      return Promise.resolve(mockResponses.currentConditions.minimal[0]);
+    const location = assertDefined(mockResponses.autocomplete.singleResult[0]);
 
-    if (mockResponses.autocomplete.singleResultAlt[0].Key === key)
-      return Promise.resolve(mockResponses.currentConditions.minimalAlt[0]);
+    if (location.Key === key)
+      return Promise.resolve(
+        assertDefined(mockResponses.currentConditions.minimal[0])
+      );
+
+    const locationAlt = assertDefined(
+      mockResponses.autocomplete.singleResultAlt[0]
+    );
+
+    if (locationAlt.Key === key)
+      return Promise.resolve(
+        assertDefined(mockResponses.currentConditions.minimalAlt[0])
+      );
 
     return Promise.reject(`Unknown key ${key}`);
   }

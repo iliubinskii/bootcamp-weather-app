@@ -19,6 +19,7 @@ import {
 import { autocompleteQuery } from "./api/autocompleteQuery.js";
 import { currentConditionsQuery } from "./api/currentConditionsQuery.js";
 import { dailyForcastQuery } from "./api/dailyForcastQuery.js";
+import { assertDefined, assertNotNull } from "./utils.js";
 
 /**
  * @param {Element} container
@@ -43,11 +44,8 @@ export function renderWeatherReport(container, key = DEFAULT_KEY) {
     </div>
   `;
 
-  /**
-   * @type {HTMLFormElement}
-   */
-  const searchForLocationEl = document.querySelector(
-    ELEMENT_SELECTOR.searchForLocation
+  const searchForLocationEl = assertNotNull(
+    document.querySelector(ELEMENT_SELECTOR.searchForLocation)
   );
 
   searchForLocationEl.addEventListener("submit", event => {
@@ -68,7 +66,7 @@ export function renderWeatherReport(container, key = DEFAULT_KEY) {
         if (response.length === 0) {
           console.error("Not implemented");
         } else if (response.length === 1) {
-          loadWeatherReport(response[0].Key);
+          loadWeatherReport(assertDefined(response[0]).Key);
         } else {
           console.error("Not implemented");
         }
@@ -82,12 +80,12 @@ export function renderWeatherReport(container, key = DEFAULT_KEY) {
  * @param {string} key
  */
 function loadWeatherReport(key) {
-  const currentConditionsContainerEl = document.querySelector(
-    ELEMENT_SELECTOR.currentConditionsContainer
+  const currentConditionsContainerEl = assertNotNull(
+    document.querySelector(ELEMENT_SELECTOR.currentConditionsContainer)
   );
 
-  const dailyForcastContainerEl = document.querySelector(
-    ELEMENT_SELECTOR.dailyForcastContainer
+  const dailyForcastContainerEl = assertNotNull(
+    document.querySelector(ELEMENT_SELECTOR.dailyForcastContainer)
   );
 
   currentConditionsQuery(key)
