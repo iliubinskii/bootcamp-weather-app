@@ -7,7 +7,8 @@ export const API_ENDPOINT = {
   autocomplete:
     "https://dataservice.accuweather.com/locations/v1/cities/autocomplete",
   currentConditions: "https://dataservice.accuweather.com/currentconditions/v1",
-  daily5: "https://dataservice.accuweather.com/forecasts/v1/daily/5day"
+  daily5: "https://dataservice.accuweather.com/forecasts/v1/daily/5day",
+  files: "https://developer.accuweather.com/sites/default/files"
 };
 
 // eslint-disable-next-line spellcheck/spell-checker -- Ok
