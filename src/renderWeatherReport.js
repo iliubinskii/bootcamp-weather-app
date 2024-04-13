@@ -64,11 +64,11 @@ export function renderWeatherReport(container, key = DEFAULT_KEY) {
     if (typeof q === "string" && q.length)
       autocompleteQuery(q).then(response => {
         if (response.length === 0) {
-          console.error("Not implemented");
+          console.error("Error in renderWeatherReport: Not implemented");
         } else if (response.length === 1) {
           loadWeatherReport(assertDefined(response[0]).Key);
         } else {
-          console.error("Not implemented");
+          console.error("Error in renderWeatherReport: Not implemented");
         }
       });
   });
@@ -97,7 +97,7 @@ function loadWeatherReport(key) {
     `;
     })
     .catch(error => {
-      console.error(error);
+      console.error("Error in loadWeatherReport:", error);
     });
 
   dailyForcastQuery(key)
@@ -109,6 +109,6 @@ function loadWeatherReport(key) {
     `;
     })
     .catch(error => {
-      console.error(error);
+      console.error("Error in loadWeatherReport:", error);
     });
 }
