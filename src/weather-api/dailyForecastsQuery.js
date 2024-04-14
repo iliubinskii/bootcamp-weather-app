@@ -1,5 +1,5 @@
+import { API_ENDPOINT, API_KEY, API_LANGUAGE, DEV_MODE } from "../consts.js";
 import { assertDefined, delayedResolve } from "../utils.js";
-import { DEV_MODE } from "../consts.js";
 import { mockResponses } from "../mocks/index.js";
 
 /**
@@ -32,5 +32,17 @@ export async function dailyForecastsQuery(key, metric) {
     return Promise.reject(`Unknown key ${key}`);
   }
 
-  return Promise.reject("Not implemented");
+  const detailsStr = "false";
+
+  const metricStr = metric ? "true" : "false";
+
+  const response = await fetch(
+    `${API_ENDPOINT.daily5}/${key}?apikey=${API_KEY}&language=${API_LANGUAGE}&details=${detailsStr}&metric=${metricStr}`
+  );
+
+  const json = await response.json();
+
+  if (typeof json === "object") return json;
+
+  throw Error(`Invalid response`);
 }

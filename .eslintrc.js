@@ -11,7 +11,8 @@ module.exports = {
     "plugin:promise/recommended",
     "plugin:prettier/recommended"
   ],
-  globals: { dateFns: "readonly" },
+  globals: { axios: "readonly", dateFns: "readonly" },
+  ignorePatterns: ["!.*", "coverage/**", "node_modules/**"],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaFeatures: { jsx: true },
@@ -43,8 +44,10 @@ module.exports = {
         "templates": true,
         "lang": "en_US",
         "skipWords": [
+          "apikey",
           "autofix",
           "aviv",
+          "axios",
           "commonjs",
           "ecma",
           "eee",
@@ -56,6 +59,7 @@ module.exports = {
           "parens",
           "readonly",
           "rerender",
+          "str",
           "subdomain",
           "tsconfig",
           "typeof"

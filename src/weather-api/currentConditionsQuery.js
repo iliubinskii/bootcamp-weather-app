@@ -3,8 +3,8 @@ TODO
 - Why this API returns an array
 */
 
+import { API_ENDPOINT, API_KEY, API_LANGUAGE, DEV_MODE } from "../consts.js";
 import { assertDefined, delayedResolve } from "../utils.js";
-import { DEV_MODE } from "../consts.js";
 import { mockResponses } from "../mocks/index.js";
 
 /**
@@ -32,5 +32,15 @@ export async function currentConditionsQuery(key) {
     return Promise.reject(`Unknown key ${key}`);
   }
 
-  return Promise.reject("Not implemented");
+  const detailsStr = "false";
+
+  const response = await fetch(
+    `${API_ENDPOINT.currentConditions}/${key}?apikey=${API_KEY}&language=${API_LANGUAGE}&details=${detailsStr}`
+  );
+
+  const json = await response.json();
+
+  if (Array.isArray(json) && json.length) return json[0];
+
+  throw Error(`Invalid response`);
 }

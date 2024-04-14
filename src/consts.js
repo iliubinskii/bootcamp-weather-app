@@ -13,7 +13,7 @@ export const API_ENDPOINT = {
 };
 
 // eslint-disable-next-line spellcheck/spell-checker -- Ok
-export const API_KEY = "JNQ5epGgZUh6jeiNJUnJfGcrFnAuooJ3";
+export const API_KEY = "8t5I2u69XSRhuGD1FPLbMSkd7BD9AFvF";
 
 export const API_LANGUAGE = "en-us";
 
@@ -26,7 +26,7 @@ export const DEFAULT_LOCATION = {
   Country: { LocalizedName: "Israel" }
 };
 
-export const DEV_MODE = true;
+export const DEV_MODE = false;
 
 export const ELEMENT_DATA = {
   currentConditionsContainer: "data-current-conditions-container",
