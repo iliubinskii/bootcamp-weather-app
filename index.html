@@ -1,7 +1,12 @@
 <!--
 TODO
+- Infinite loading for broken list items
+- Lint promises
+- Loading animation for buttons
+- Real queries
+- Scrollbar shifts content
 - Tests
-- Favorites style
+- Why current conditions API returns an array
 -->
 
 <!doctype html>
@@ -21,7 +26,7 @@ TODO
     <link rel="stylesheet" href="src/style.css" />
   </head>
   <body>
-    <!-- Header navigation -->
+    <!-- Header -->
     <div class="bg-primary">
       <div
         class="app-font app-max-width d-flex px-2 px-sm-5 py-3 justify-content-between align-items-center text-white"
@@ -37,14 +42,35 @@ TODO
         </div>
       </div>
     </div>
-    <!-- Header navigation END -->
+    <!-- Header END -->
 
-    <!-- Page container -->
+    <!-- Contents -->
     <div
       class="app-font app-max-width px-2 px-sm-5 py-4 d-flex flex-column gap-4"
-      data-page-container
-    ></div>
-    <!-- Page container END -->
+    >
+      <!-- Search for location -->
+      <form data-search-for-location class="input-group">
+        <input
+          data-search-for-location-input
+          class="form-control"
+          name="q"
+          type="text"
+          placeholder="Search for location"
+        />
+        <button
+          data-search-for-location-button
+          class="btn btn-outline-secondary px-3"
+        >
+          <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+        </button>
+      </form>
+      <!-- Search for location END -->
+
+      <!-- Page container -->
+      <div data-page-container class="d-flex flex-column gap-4"></div>
+      <!-- Page container END -->
+    </div>
+    <!-- Contents END -->
 
     <script src="https://cdn.jsdelivr.net/npm/date-fns@3.6.0/cdn.min.js"></script>
     <script src="src/index.js" type="module"></script>

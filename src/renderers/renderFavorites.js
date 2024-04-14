@@ -1,54 +1,14 @@
-/*
-TODO
-- Implement the renderFavorites function
-*/
-
-import { ELEMENT_DATA, ELEMENT_SELECTOR } from "../consts.js";
-import { assertDefined, assertNotNull } from "../utils.js";
 import { getFavoritesStore } from "../local-storage/index.js";
+import { renderLocationsList } from "./renderLocationsList.js";
 
 /**
  * @param {Element} containerEl
- * @param {(favorite: typeof import("../types.js").LocationType) => void} onSelectFavorite
+ * @param {(location: typeof import("../types.js").LocationType) => Promise<void>} onSelectLocation
  */
-export function renderFavorites(containerEl, onSelectFavorite) {
+export function renderFavorites(containerEl, onSelectLocation) {
   const { getFavorites } = getFavoritesStore();
 
   const favorites = getFavorites();
 
-  containerEl.innerHTML = /*html*/ `
-    <div class="list-group">
-      ${favorites
-        .map(favorite => {
-          return /*html*/ `
-            <button
-              ${ELEMENT_DATA.favorite}
-              ${`${ELEMENT_DATA.favoriteKey}="${favorite.Key}"`}
-              class="list-group-item"
-            >
-              ${favorite.LocalizedName}, ${favorite.Country.LocalizedName}
-            </button>
-          `;
-        })
-        .join("\n")}
-    </div>
-  `;
-
-  const favoriteElements = containerEl.querySelectorAll(
-    ELEMENT_SELECTOR.favorite
-  );
-
-  favoriteElements.forEach(favoriteEl => {
-    favoriteEl.addEventListener("click", () => {
-      const key = assertNotNull(
-        favoriteEl.getAttribute(ELEMENT_DATA.favoriteKey)
-      );
-
-      const favorite = assertDefined(
-        favorites.find(favorite => favorite.Key === key)
-      );
-
-      onSelectFavorite(favorite);
-    });
-  });
+  renderLocationsList(containerEl, favorites, onSelectLocation);
 }

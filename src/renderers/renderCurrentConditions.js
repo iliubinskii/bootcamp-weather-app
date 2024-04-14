@@ -103,7 +103,7 @@ export function renderCurrentConditions(
    */
   function getFavoriteIcon() {
     return isFavorite(location.Key)
-      ? '<i class="fa-solid fa-heart fa-lg"></i>'
-      : '<i class="fa-regular fa-heart fa-lg"></i>';
+      ? /*html*/ `<i class="fa-solid fa-heart fa-lg"></i>`
+      : /*html*/ `<i class="fa-regular fa-heart fa-lg"></i>`;
   }
 }

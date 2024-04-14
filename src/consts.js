@@ -31,17 +31,17 @@ export const DEV_MODE = true;
 export const ELEMENT_DATA = {
   currentConditionsContainer: "data-current-conditions-container",
   dailyForecastsContainer: "data-daily-forecasts-container",
-  favorite: "data-favorite",
-  favoriteKey: "data-favorite-key",
   favoritesLink: "data-favorites-link",
   location: "data-location",
+  locationIconContainer: "data-location-icon-container",
   locationKey: "data-location-key",
   pageContainer: "data-page-container",
   reloadButton: "data-reload-button",
   searchForLocation: "data-search-for-location",
+  searchForLocationButton: "data-search-for-location-button",
+  searchForLocationInput: "data-search-for-location-input",
   toggleFavoriteButton: "data-toggle-favorite-button",
   toggleMetricButton: "data-toggle-metric-button",
-  weatherReportContainer: "data-weather-report-container",
   weatherReportLink: "data-weather-report-link"
 };
 
@@ -61,3 +61,5 @@ export const LOCAL_STORAGE_KEY = {
   appState: "app-state",
   favorites: "favorites"
 };
+
+export const TEST_DELAY_MS = 1000;
