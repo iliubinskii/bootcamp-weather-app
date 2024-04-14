@@ -23,7 +23,7 @@ function createSingleton() {
 
           if (index !== -1) favorites.splice(index, 1);
 
-          favorites.push(location);
+          favorites.unshift(location);
 
           writeToLocalStorage(favorites);
         },
