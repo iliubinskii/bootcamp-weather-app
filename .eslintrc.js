@@ -44,6 +44,7 @@ module.exports = {
         "templates": true,
         "lang": "en_US",
         "skipWords": [
+          "afterend",
           "apikey",
           "autofix",
           "aviv",

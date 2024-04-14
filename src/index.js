@@ -1,4 +1,4 @@
-import { ELEMENT_SELECTOR, FORM_FIELD } from "./consts.js";
+import { DEV_MODE, ELEMENT_SELECTOR, FORM_FIELD } from "./consts.js";
 import {
   assertDefined,
   assertHTMLFormElement,
@@ -126,6 +126,15 @@ init();
 
 function init() {
   const { location } = getAppState();
+
+  if (DEV_MODE) {
+    const newElement = document.createElement("div");
+
+    newElement.className = "alert alert-info";
+    newElement.innerText = `Running in development mode. Available search queries: "Tel", "Tel Aviv", "Timbuktu"`;
+
+    searchForLocationEl.insertAdjacentElement("afterend", newElement);
+  }
 
   // eslint-disable-next-line @typescript-eslint/no-floating-promises -- Ok
   openWeatherReport(location).catch(error => {
