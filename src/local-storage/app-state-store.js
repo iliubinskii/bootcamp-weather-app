@@ -60,6 +60,7 @@ function readFromLocalStorage() {
 
     if (
       typeof jsonData === "object" &&
+      typeof jsonData.devMode === "boolean" &&
       typeof jsonData.location === "object" &&
       typeof jsonData.metric === "boolean"
     )
