@@ -50,11 +50,20 @@ export function renderLocationsList(containerEl, locations, onSelectLocation) {
         locationEl.querySelector(ELEMENT_SELECTOR.locationIconContainer)
       );
 
+      locationEl.setAttribute("disabled", "");
       locationIconContainerEl.innerHTML = /*html*/ `
         <i class="fa fa-spinner fa-spin fa-xl text-secondary"></i>
       `;
 
-      await onSelectLocation(location);
+      try {
+        await onSelectLocation(location);
+      } catch (error) {
+        locationEl.removeAttribute("disabled");
+        locationIconContainerEl.innerHTML = /*html*/ `
+          <i class="fa-solid fa-face-frown fa-xl text-secondary"></i>
+        `;
+        throw error;
+      }
     });
   });
 }

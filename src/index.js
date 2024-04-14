@@ -41,7 +41,24 @@ const pageContainerEl = assertNotNull(
 
 // eslint-disable-next-line @typescript-eslint/no-misused-promises -- Ok
 weatherReportLinkEl.addEventListener("click", async () => {
-  await openWeatherReport();
+  weatherReportLinkEl.setAttribute("disabled", "");
+  weatherReportLinkEl.innerHTML = /*html*/ `
+    <i class="fa fa-spinner fa-spin fa-lg"></i>
+  `;
+
+  try {
+    await openWeatherReport();
+    weatherReportLinkEl.removeAttribute("disabled");
+    weatherReportLinkEl.innerHTML = /*html*/ `
+      <i class="fa-solid fa-chart-simple fa-lg"></i>
+    `;
+  } catch (error) {
+    weatherReportLinkEl.removeAttribute("disabled");
+    weatherReportLinkEl.innerHTML = /*html*/ `
+      <i class="fa-solid fa-face-frown fa-lg"></i>
+    `;
+    throw error;
+  }
 });
 
 favoritesLinkEl.addEventListener("click", openFavorites);

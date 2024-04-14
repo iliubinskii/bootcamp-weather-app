@@ -93,13 +93,39 @@ export function renderCurrentConditions(
 
   // eslint-disable-next-line @typescript-eslint/no-misused-promises -- Ok
   toggleMetricButtonEl.addEventListener("click", async () => {
-    setMetric(!metric);
-    await rerender();
+    toggleMetricButtonEl.setAttribute("disabled", "");
+    toggleMetricButtonEl.innerHTML = /*html*/ `
+      <i class="fa fa-spinner fa-spin fa-lg"></i>
+    `;
+
+    try {
+      setMetric(!metric);
+      await rerender();
+    } catch (error) {
+      toggleMetricButtonEl.removeAttribute("disabled");
+      toggleMetricButtonEl.innerHTML = /*html*/ `
+        <i class="fa-solid fa-face-frown fa-lg"></i>
+      `;
+      throw error;
+    }
   });
 
   // eslint-disable-next-line @typescript-eslint/no-misused-promises -- Ok
   toggleReloadButtonEl.addEventListener("click", async () => {
-    await rerender();
+    toggleReloadButtonEl.setAttribute("disabled", "");
+    toggleReloadButtonEl.innerHTML = /*html*/ `
+      <i class="fa fa-spinner fa-spin fa-lg"></i>
+    `;
+
+    try {
+      await rerender();
+    } catch (error) {
+      toggleReloadButtonEl.removeAttribute("disabled");
+      toggleReloadButtonEl.innerHTML = /*html*/ `
+        <i class="fa-solid fa-face-frown fa-lg"></i>
+      `;
+      throw error;
+    }
   });
 
   /**

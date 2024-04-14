@@ -1,3 +1,8 @@
+/*
+TODO
+- Why this API returns an array
+*/
+
 import { assertDefined, delayedResolve } from "../utils.js";
 import { DEV_MODE } from "../consts.js";
 import { mockResponses } from "../mocks/index.js";
