@@ -39,10 +39,14 @@ const pageContainerEl = assertNotNull(
   document.querySelector(ELEMENT_SELECTOR.pageContainer)
 );
 
-weatherReportLinkEl.addEventListener("click", openWeatherReport);
+// eslint-disable-next-line @typescript-eslint/no-misused-promises -- Ok
+weatherReportLinkEl.addEventListener("click", async () => {
+  await openWeatherReport();
+});
 
 favoritesLinkEl.addEventListener("click", openFavorites);
 
+// eslint-disable-next-line @typescript-eslint/no-misused-promises -- Ok
 searchForLocationEl.addEventListener("submit", async event => {
   event.preventDefault();
 
@@ -92,6 +96,7 @@ searchForLocationEl.addEventListener("submit", async event => {
   } else renderErrorMessage(pageContainerEl, "Please enter a location.");
 });
 
+// eslint-disable-next-line @typescript-eslint/no-floating-promises -- Ok
 openWeatherReport();
 
 function openFavorites() {
@@ -100,8 +105,11 @@ function openFavorites() {
   });
 }
 
-function openWeatherReport() {
+/**
+ * @returns {Promise<void>}
+ */
+async function openWeatherReport() {
   const { location } = getAppState();
 
-  renderWeatherReport(pageContainerEl, location, openWeatherReport);
+  await renderWeatherReport(pageContainerEl, location, openWeatherReport);
 }

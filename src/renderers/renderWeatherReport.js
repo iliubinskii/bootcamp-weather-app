@@ -11,7 +11,7 @@ import { renderDailyForecasts } from "./renderDailyForecasts.js";
 /**
  * @param {Element} containerEl
  * @param {typeof import("../types.js").LocationType} location
- * @param {() => void} rerender
+ * @param {() => Promise<void>} rerender
  * @returns {Promise<void>}
  */
 export async function renderWeatherReport(containerEl, location, rerender) {

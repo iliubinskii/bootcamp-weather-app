@@ -1,19 +1,28 @@
 module.exports = {
-  parserOptions: {
-    ecmaFeatures: { jsx: true },
-    ecmaVersion: 2020,
-    sourceType: "module"
-  },
   env: {
     browser: true,
     commonjs: true,
     es2020: true,
     node: true
   },
-  extends: ["eslint:recommended", "plugin:prettier/recommended"],
+  extends: [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:promise/recommended",
+    "plugin:prettier/recommended"
+  ],
   globals: { dateFns: "readonly" },
-  plugins: ["sort-imports-requires", "spellcheck"],
+  parser: "@typescript-eslint/parser",
+  parserOptions: {
+    ecmaFeatures: { jsx: true },
+    ecmaVersion: 2020,
+    project: "tsconfig.json",
+    sourceType: "module"
+  },
+  plugins: ["only-warn", "sort-imports-requires", "spellcheck"],
   rules: {
+    "@typescript-eslint/no-floating-promises": "warn",
+    "@typescript-eslint/no-misused-promises": "warn",
     "prettier/prettier": [
       "warn",
       {
@@ -48,6 +57,7 @@ module.exports = {
           "readonly",
           "rerender",
           "subdomain",
+          "tsconfig",
           "typeof"
         ],
         "minLength": 3

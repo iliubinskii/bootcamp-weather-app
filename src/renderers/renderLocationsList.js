@@ -36,6 +36,7 @@ export function renderLocationsList(containerEl, locations, onSelectLocation) {
   );
 
   locationElements.forEach(locationEl => {
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises -- Ok
     locationEl.addEventListener("click", async () => {
       const key = assertNotNull(
         locationEl.getAttribute(ELEMENT_DATA.locationKey)

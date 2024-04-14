@@ -48,7 +48,8 @@ export const ELEMENT_DATA = {
 /**
  * @type {Record<keyof typeof ELEMENT_DATA, string>}
  */
-// @ts-ignore
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- Ok
+// @ts-expect-error
 export const ELEMENT_SELECTOR = Object.fromEntries(
   Object.entries(ELEMENT_DATA).map(([key, value]) => [key, `[${value}]`])
 );

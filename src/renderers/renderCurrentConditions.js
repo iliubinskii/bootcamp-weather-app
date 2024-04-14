@@ -12,7 +12,7 @@ import { getFavoritesStore } from "../local-storage/favorites-store.js";
  * @param {Element} containerEl
  * @param {typeof import("../types.js").LocationType} location
  * @param {typeof import("../types.js").CurrentConditionsType} conditions
- * @param {() => void} rerender
+ * @param {() => Promise<void>} rerender
  */
 export function renderCurrentConditions(
   containerEl,
@@ -91,12 +91,16 @@ export function renderCurrentConditions(
     toggleFavoriteButton.innerHTML = getFavoriteIcon();
   });
 
-  toggleMetricButtonEl.addEventListener("click", () => {
+  // eslint-disable-next-line @typescript-eslint/no-misused-promises -- Ok
+  toggleMetricButtonEl.addEventListener("click", async () => {
     setMetric(!metric);
-    rerender();
+    await rerender();
   });
 
-  toggleReloadButtonEl.addEventListener("click", rerender);
+  // eslint-disable-next-line @typescript-eslint/no-misused-promises -- Ok
+  toggleReloadButtonEl.addEventListener("click", async () => {
+    await rerender();
+  });
 
   /**
    * @returns {string}
