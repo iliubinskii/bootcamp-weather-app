@@ -33,15 +33,11 @@ export function assertNotNull(value) {
 }
 
 /**
- * @template T
- * @param {T} value
- * @returns {Promise<T>}
+ * @returns {Promise<void>}
  */
-export function delayedResolve(value) {
+export function testDelay() {
   return new Promise(resolve => {
-    setTimeout(() => {
-      resolve(value);
-    }, TEST_DELAY_MS);
+    setTimeout(resolve, TEST_DELAY_MS);
   });
 }
 

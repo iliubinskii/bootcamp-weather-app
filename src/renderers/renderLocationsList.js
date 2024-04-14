@@ -5,8 +5,14 @@ import { assertDefined, assertNotNull } from "../utils.js";
  * @param {Element} containerEl
  * @param {typeof import("../types.js").LocationsType} locations
  * @param {(location: typeof import("../types.js").LocationType) => Promise<void>} onSelectLocation
+ * @param {(error: string) => void} onError
  */
-export function renderLocationsList(containerEl, locations, onSelectLocation) {
+export function renderLocationsList(
+  containerEl,
+  locations,
+  onSelectLocation,
+  onError
+) {
   containerEl.innerHTML = /*html*/ `
     <div class="list-group">
       ${locations
@@ -58,10 +64,7 @@ export function renderLocationsList(containerEl, locations, onSelectLocation) {
       try {
         await onSelectLocation(location);
       } catch (error) {
-        locationEl.removeAttribute("disabled");
-        locationIconContainerEl.innerHTML = /*html*/ `
-          <i class="fa-solid fa-face-frown fa-xl text-secondary"></i>
-        `;
+        onError(`Failed to load weather data for ${location.LocalizedName}`);
         throw error;
       }
     });

@@ -4,7 +4,7 @@ TODO
 */
 
 import { API_ENDPOINT, API_KEY, API_LANGUAGE, DEV_MODE } from "../consts.js";
-import { assertDefined, delayedResolve } from "../utils.js";
+import { assertDefined, testDelay } from "../utils.js";
 import { mockResponses } from "../mocks/index.js";
 
 /**
@@ -13,21 +13,19 @@ import { mockResponses } from "../mocks/index.js";
  */
 export async function currentConditionsQuery(key) {
   if (DEV_MODE) {
+    await testDelay();
+
     const location = assertDefined(mockResponses.autocomplete.singleResult[0]);
 
     if (location.Key === key)
-      return delayedResolve(
-        assertDefined(mockResponses.currentConditions.minimal[0])
-      );
+      return assertDefined(mockResponses.currentConditions.minimal[0]);
 
     const locationAlt = assertDefined(
       mockResponses.autocomplete.singleResultAlt[0]
     );
 
     if (locationAlt.Key === key)
-      return delayedResolve(
-        assertDefined(mockResponses.currentConditions.minimalAlt[0])
-      );
+      return assertDefined(mockResponses.currentConditions.minimalAlt[0]);
 
     return Promise.reject(`Unknown key ${key}`);
   }

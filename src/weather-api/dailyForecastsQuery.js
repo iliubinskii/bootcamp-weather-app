@@ -1,5 +1,5 @@
 import { API_ENDPOINT, API_KEY, API_LANGUAGE, DEV_MODE } from "../consts.js";
-import { assertDefined, delayedResolve } from "../utils.js";
+import { assertDefined, testDelay } from "../utils.js";
 import { mockResponses } from "../mocks/index.js";
 
 /**
@@ -9,25 +9,23 @@ import { mockResponses } from "../mocks/index.js";
  */
 export async function dailyForecastsQuery(key, metric) {
   if (DEV_MODE) {
+    await testDelay();
+
     const location = assertDefined(mockResponses.autocomplete.singleResult[0]);
 
     if (location.Key === key)
-      return delayedResolve(
-        metric
-          ? mockResponses.daily5.minimalMetric
-          : mockResponses.daily5.minimal
-      );
+      return metric
+        ? mockResponses.daily5.minimalMetric
+        : mockResponses.daily5.minimal;
 
     const locationAlt = assertDefined(
       mockResponses.autocomplete.singleResultAlt[0]
     );
 
     if (locationAlt.Key === key)
-      return delayedResolve(
-        metric
-          ? mockResponses.daily5.minimalMetricAlt
-          : mockResponses.daily5.minimalAlt
-      );
+      return metric
+        ? mockResponses.daily5.minimalMetricAlt
+        : mockResponses.daily5.minimalAlt;
 
     return Promise.reject(`Unknown key ${key}`);
   }

@@ -41,23 +41,23 @@ const pageContainerEl = assertNotNull(
 
 // eslint-disable-next-line @typescript-eslint/no-misused-promises -- Ok
 weatherReportLinkEl.addEventListener("click", async () => {
+  const { location } = getAppState();
+
   weatherReportLinkEl.setAttribute("disabled", "");
   weatherReportLinkEl.innerHTML = /*html*/ `
     <i class="fa fa-spinner fa-spin fa-lg"></i>
   `;
 
   try {
-    await openWeatherReport();
+    await openWeatherReport(location);
+  } catch (error) {
+    onError(`Failed to load weather data for ${location.LocalizedName}`);
+    throw error;
+  } finally {
     weatherReportLinkEl.removeAttribute("disabled");
     weatherReportLinkEl.innerHTML = /*html*/ `
       <i class="fa-solid fa-chart-simple fa-lg"></i>
     `;
-  } catch (error) {
-    weatherReportLinkEl.removeAttribute("disabled");
-    weatherReportLinkEl.innerHTML = /*html*/ `
-      <i class="fa-solid fa-face-frown fa-lg"></i>
-    `;
-    throw error;
   }
 });
 
@@ -93,15 +93,24 @@ searchForLocationEl.addEventListener("submit", async event => {
           await renderWeatherReport(
             pageContainerEl,
             assertDefined(locations[0]),
-            openWeatherReport
+            async () => {
+              await openWeatherReport(getAppState().location);
+            }
           );
 
           break;
 
         default:
-          renderLocationsList(pageContainerEl, locations, async key => {
-            await renderWeatherReport(pageContainerEl, key, openWeatherReport);
-          });
+          renderLocationsList(
+            pageContainerEl,
+            locations,
+            async key => {
+              await renderWeatherReport(pageContainerEl, key, async () => {
+                await openWeatherReport(getAppState().location);
+              });
+            },
+            onError
+          );
       }
     } finally {
       searchForLocationButtonEl.removeAttribute("disabled");
@@ -113,20 +122,44 @@ searchForLocationEl.addEventListener("submit", async event => {
   } else renderErrorMessage(pageContainerEl, "Please enter a location.");
 });
 
-// eslint-disable-next-line @typescript-eslint/no-floating-promises -- Ok
-openWeatherReport();
+init();
 
-function openFavorites() {
-  renderFavorites(pageContainerEl, async favorite => {
-    await renderWeatherReport(pageContainerEl, favorite, openWeatherReport);
+function init() {
+  const { location } = getAppState();
+
+  // eslint-disable-next-line @typescript-eslint/no-floating-promises -- Ok
+  openWeatherReport(location).catch(error => {
+    onError(`Failed to load weather data for ${location.LocalizedName}`);
+    throw error;
   });
 }
 
 /**
- * @returns {Promise<void>}
+ * @param {string} error
  */
-async function openWeatherReport() {
-  const { location } = getAppState();
+function onError(error) {
+  renderErrorMessage(pageContainerEl, error);
+}
 
-  await renderWeatherReport(pageContainerEl, location, openWeatherReport);
+function openFavorites() {
+  renderFavorites(
+    pageContainerEl,
+    async favorite => {
+      await renderWeatherReport(pageContainerEl, favorite, async () => {
+        await openWeatherReport(getAppState().location);
+      });
+    },
+    onError
+  );
+}
+
+/**
+ * @param {typeof import("./types.js").LocationType} location
+ * @returns {Promise<void>}
+ *
+ */
+async function openWeatherReport(location) {
+  await renderWeatherReport(pageContainerEl, location, async () => {
+    await openWeatherReport(getAppState().location);
+  });
 }

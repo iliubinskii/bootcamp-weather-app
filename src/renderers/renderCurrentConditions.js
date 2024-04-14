@@ -13,12 +13,14 @@ import { getFavoritesStore } from "../local-storage/favorites-store.js";
  * @param {typeof import("../types.js").LocationType} location
  * @param {typeof import("../types.js").CurrentConditionsType} conditions
  * @param {() => Promise<void>} rerender
+ * @param {(error: string) => void} onError
  */
 export function renderCurrentConditions(
   containerEl,
   location,
   conditions,
-  rerender
+  rerender,
+  onError
 ) {
   const { addToFavorites, isFavorite, removeFromFavorites } =
     getFavoritesStore();
@@ -102,10 +104,7 @@ export function renderCurrentConditions(
       setMetric(!metric);
       await rerender();
     } catch (error) {
-      toggleMetricButtonEl.removeAttribute("disabled");
-      toggleMetricButtonEl.innerHTML = /*html*/ `
-        <i class="fa-solid fa-face-frown fa-lg"></i>
-      `;
+      onError(`Failed to load weather data for ${location.LocalizedName}`);
       throw error;
     }
   });
@@ -120,10 +119,7 @@ export function renderCurrentConditions(
     try {
       await rerender();
     } catch (error) {
-      toggleReloadButtonEl.removeAttribute("disabled");
-      toggleReloadButtonEl.innerHTML = /*html*/ `
-        <i class="fa-solid fa-face-frown fa-lg"></i>
-      `;
+      onError(`Failed to load weather data for ${location.LocalizedName}`);
       throw error;
     }
   });

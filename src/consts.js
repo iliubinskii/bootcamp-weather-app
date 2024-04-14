@@ -26,7 +26,7 @@ export const DEFAULT_LOCATION = {
   Country: { LocalizedName: "Israel" }
 };
 
-export const DEV_MODE = false;
+export const DEV_MODE = true;
 
 export const ELEMENT_DATA = {
   currentConditionsContainer: "data-current-conditions-container",
