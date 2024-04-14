@@ -12,18 +12,22 @@ import { renderDailyForecasts } from "./renderDailyForecasts.js";
  * @param {Element} containerEl
  * @param {typeof import("../types.js").LocationType} location
  * @param {() => Promise<void>} rerender
+ * @param {(error: string) => void} onError
  * @returns {Promise<void>}
  */
-export async function renderWeatherReport(containerEl, location, rerender) {
-  const { getAppState, setLocation } = getAppStateStore();
-
-  const { metric } = getAppState();
+export async function renderWeatherReport(
+  containerEl,
+  location,
+  rerender,
+  onError
+) {
+  const { setLocation } = getAppStateStore();
 
   setLocation(location);
 
   const [currentConditions, dailyForecasts] = await Promise.all([
     currentConditionsQuery(location.Key),
-    dailyForecastsQuery(location.Key, metric)
+    dailyForecastsQuery(location.Key)
   ]);
 
   containerEl.innerHTML = /*html*/ `
@@ -54,7 +58,8 @@ export async function renderWeatherReport(containerEl, location, rerender) {
     currentConditionsContainerEl,
     location,
     currentConditions,
-    rerender
+    rerender,
+    onError
   );
 
   renderDailyForecasts(dailyForecastsContainerEl, dailyForecasts);

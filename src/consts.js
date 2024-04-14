@@ -26,11 +26,10 @@ export const DEFAULT_LOCATION = {
   Country: { LocalizedName: "Israel" }
 };
 
-export const DEV_MODE = true;
-
 export const ELEMENT_DATA = {
   currentConditionsContainer: "data-current-conditions-container",
   dailyForecastsContainer: "data-daily-forecasts-container",
+  devModeAlert: "data-dev-mode-alert",
   favoritesLink: "data-favorites-link",
   location: "data-location",
   locationIconContainer: "data-location-icon-container",
@@ -40,6 +39,7 @@ export const ELEMENT_DATA = {
   searchForLocation: "data-search-for-location",
   searchForLocationButton: "data-search-for-location-button",
   searchForLocationInput: "data-search-for-location-input",
+  toggleDevModeButton: "data-toggle-dev-mode-button",
   toggleFavoriteButton: "data-toggle-favorite-button",
   toggleMetricButton: "data-toggle-metric-button",
   weatherReportLink: "data-weather-report-link"

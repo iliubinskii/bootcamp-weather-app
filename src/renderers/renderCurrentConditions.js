@@ -5,8 +5,7 @@ import {
   getTemperatureText,
   getWeatherIconImg
 } from "../utils.js";
-import { getAppStateStore } from "../local-storage/app-state-store.js";
-import { getFavoritesStore } from "../local-storage/favorites-store.js";
+import { getAppStateStore, getFavoritesStore } from "../local-storage/index.js";
 
 /**
  * @param {Element} containerEl

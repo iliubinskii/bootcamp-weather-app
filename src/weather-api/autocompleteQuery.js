@@ -1,5 +1,6 @@
-import { API_ENDPOINT, API_KEY, API_LANGUAGE, DEV_MODE } from "../consts.js";
+import { API_ENDPOINT, API_KEY, API_LANGUAGE } from "../consts.js";
 import { assertDefined, testDelay } from "../utils.js";
+import { getAppStateStore } from "../local-storage/app-state-store.js";
 import { mockResponses } from "../mocks/index.js";
 
 /**
@@ -9,7 +10,11 @@ import { mockResponses } from "../mocks/index.js";
 export async function autocompleteQuery(q) {
   if (q === "") return [];
 
-  if (DEV_MODE) {
+  const { getAppState } = getAppStateStore();
+
+  const { devMode } = getAppState();
+
+  if (devMode) {
     await testDelay();
 
     const location = assertDefined(mockResponses.autocomplete.singleResult[0]);

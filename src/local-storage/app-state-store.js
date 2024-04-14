@@ -23,6 +23,15 @@ function createSingleton() {
         },
 
         /**
+         * @param {boolean} devMode
+         */
+        setDevMode: devMode => {
+          state.devMode = devMode;
+
+          writeToLocalStorage(state);
+        },
+
+        /**
          * @param {boolean} metric
          */
         setMetric: metric => {
@@ -57,7 +66,7 @@ function readFromLocalStorage() {
       return jsonData;
   }
 
-  return { location: DEFAULT_LOCATION, metric: true };
+  return { devMode: true, location: DEFAULT_LOCATION, metric: true };
 }
 
 /**

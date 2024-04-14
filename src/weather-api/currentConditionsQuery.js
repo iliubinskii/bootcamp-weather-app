@@ -3,8 +3,9 @@ TODO
 - Why this API returns an array
 */
 
-import { API_ENDPOINT, API_KEY, API_LANGUAGE, DEV_MODE } from "../consts.js";
+import { API_ENDPOINT, API_KEY, API_LANGUAGE } from "../consts.js";
 import { assertDefined, testDelay } from "../utils.js";
+import { getAppStateStore } from "../local-storage/app-state-store.js";
 import { mockResponses } from "../mocks/index.js";
 
 /**
@@ -12,7 +13,11 @@ import { mockResponses } from "../mocks/index.js";
  * @returns {Promise<typeof import("../types.js").CurrentConditionsType>}
  */
 export async function currentConditionsQuery(key) {
-  if (DEV_MODE) {
+  const { getAppState } = getAppStateStore();
+
+  const { devMode } = getAppState();
+
+  if (devMode) {
     await testDelay();
 
     const location = assertDefined(mockResponses.autocomplete.singleResult[0]);

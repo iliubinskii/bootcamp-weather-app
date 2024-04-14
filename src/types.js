@@ -78,8 +78,13 @@ export const TemperatureType = { Unit: "", Value: 0 };
 
 /**
  * @type {{
+ *   devMode: boolean,
  *   location: LocationType,
  *   metric: boolean
  * }}
  */
-export const AppStateType = { location: LocationType, metric: false };
+export const AppStateType = {
+  devMode: false,
+  location: LocationType,
+  metric: false
+};

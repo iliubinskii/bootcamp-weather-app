@@ -1,4 +1,4 @@
-import { DEV_MODE, ELEMENT_SELECTOR, FORM_FIELD } from "./consts.js";
+import { ELEMENT_DATA, ELEMENT_SELECTOR, FORM_FIELD } from "./consts.js";
 import {
   assertDefined,
   assertHTMLFormElement,
@@ -11,9 +11,9 @@ import {
   renderWeatherReport
 } from "./renderers/index.js";
 import { autocompleteQuery } from "./weather-api/autocompleteQuery.js";
-import { getAppStateStore } from "./local-storage/app-state-store.js";
+import { getAppStateStore } from "./local-storage/index.js";
 
-const { getAppState } = getAppStateStore();
+const { getAppState, setDevMode } = getAppStateStore();
 
 const weatherReportLinkEl = assertNotNull(
   document.querySelector(ELEMENT_SELECTOR.weatherReportLink)
@@ -21,6 +21,10 @@ const weatherReportLinkEl = assertNotNull(
 
 const favoritesLinkEl = assertNotNull(
   document.querySelector(ELEMENT_SELECTOR.favoritesLink)
+);
+
+const toggleDevModeButtonEl = assertNotNull(
+  document.querySelector(ELEMENT_SELECTOR.toggleDevModeButton)
 );
 
 const searchForLocationEl = assertNotNull(
@@ -63,6 +67,13 @@ weatherReportLinkEl.addEventListener("click", async () => {
 
 favoritesLinkEl.addEventListener("click", openFavorites);
 
+toggleDevModeButtonEl.addEventListener("click", () => {
+  const { devMode } = getAppState();
+
+  setDevMode(!devMode);
+  renderDevModeAlert();
+});
+
 // eslint-disable-next-line @typescript-eslint/no-misused-promises -- Ok
 searchForLocationEl.addEventListener("submit", async event => {
   event.preventDefault();
@@ -95,7 +106,8 @@ searchForLocationEl.addEventListener("submit", async event => {
             assertDefined(locations[0]),
             async () => {
               await openWeatherReport(getAppState().location);
-            }
+            },
+            onError
           );
 
           break;
@@ -105,9 +117,14 @@ searchForLocationEl.addEventListener("submit", async event => {
             pageContainerEl,
             locations,
             async key => {
-              await renderWeatherReport(pageContainerEl, key, async () => {
-                await openWeatherReport(getAppState().location);
-              });
+              await renderWeatherReport(
+                pageContainerEl,
+                key,
+                async () => {
+                  await openWeatherReport(getAppState().location);
+                },
+                onError
+              );
             },
             onError
           );
@@ -123,24 +140,34 @@ searchForLocationEl.addEventListener("submit", async event => {
 });
 
 init();
+renderDevModeAlert();
 
 function init() {
   const { location } = getAppState();
-
-  if (DEV_MODE) {
-    const newElement = document.createElement("div");
-
-    newElement.className = "alert alert-info";
-    newElement.innerText = `Running in development mode. Available search queries: "Tel", "Tel Aviv", "Timbuktu"`;
-
-    searchForLocationEl.insertAdjacentElement("afterend", newElement);
-  }
 
   // eslint-disable-next-line @typescript-eslint/no-floating-promises -- Ok
   openWeatherReport(location).catch(error => {
     onError(`Failed to load weather data for ${location.LocalizedName}`);
     throw error;
   });
+}
+
+function renderDevModeAlert() {
+  const { devMode } = getAppState();
+
+  if (devMode) {
+    const newElement = document.createElement("div");
+
+    newElement.setAttribute(ELEMENT_DATA.devModeAlert, "");
+    newElement.className = "alert alert-info";
+    newElement.innerText = `Running in development mode. Available search queries: "Tel", "Tel Aviv", "Timbuktu"`;
+
+    searchForLocationEl.insertAdjacentElement("afterend", newElement);
+  } else {
+    const element = document.querySelector(ELEMENT_SELECTOR.devModeAlert);
+
+    if (element) element.remove();
+  }
 }
 
 /**
@@ -154,9 +181,14 @@ function openFavorites() {
   renderFavorites(
     pageContainerEl,
     async favorite => {
-      await renderWeatherReport(pageContainerEl, favorite, async () => {
-        await openWeatherReport(getAppState().location);
-      });
+      await renderWeatherReport(
+        pageContainerEl,
+        favorite,
+        async () => {
+          await openWeatherReport(getAppState().location);
+        },
+        onError
+      );
     },
     onError
   );
@@ -168,7 +200,12 @@ function openFavorites() {
  *
  */
 async function openWeatherReport(location) {
-  await renderWeatherReport(pageContainerEl, location, async () => {
-    await openWeatherReport(getAppState().location);
-  });
+  await renderWeatherReport(
+    pageContainerEl,
+    location,
+    async () => {
+      await openWeatherReport(getAppState().location);
+    },
+    onError
+  );
 }

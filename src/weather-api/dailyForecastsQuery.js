@@ -1,14 +1,18 @@
-import { API_ENDPOINT, API_KEY, API_LANGUAGE, DEV_MODE } from "../consts.js";
+import { API_ENDPOINT, API_KEY, API_LANGUAGE } from "../consts.js";
 import { assertDefined, testDelay } from "../utils.js";
+import { getAppStateStore } from "../local-storage/index.js";
 import { mockResponses } from "../mocks/index.js";
 
 /**
  * @param {string} key
- * @param {boolean} metric
  * @returns {Promise<typeof import("../types.js").DailyForecastsType>}
  */
-export async function dailyForecastsQuery(key, metric) {
-  if (DEV_MODE) {
+export async function dailyForecastsQuery(key) {
+  const { getAppState } = getAppStateStore();
+
+  const { devMode, metric } = getAppState();
+
+  if (devMode) {
     await testDelay();
 
     const location = assertDefined(mockResponses.autocomplete.singleResult[0]);
