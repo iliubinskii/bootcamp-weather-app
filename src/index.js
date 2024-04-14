@@ -160,7 +160,7 @@ function renderDevModeAlert() {
 
     newElement.setAttribute(ELEMENT_DATA.devModeAlert, "");
     newElement.className = "alert alert-info";
-    newElement.innerText = `Running in development mode. Available search queries: "Tel", "Tel Aviv", "Timbuktu"`;
+    newElement.innerText = `Running in development mode. Available search queries: "Tel", "Tel Aviv", "Timbuktu". Use "Cog" button at the top-right corner to toggle development mode.`;
 
     searchForLocationEl.insertAdjacentElement("afterend", newElement);
   } else {
