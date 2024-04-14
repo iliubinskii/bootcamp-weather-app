@@ -13,7 +13,7 @@ export const API_ENDPOINT = {
 };
 
 // eslint-disable-next-line spellcheck/spell-checker -- Ok
-export const API_KEY = "8t5I2u69XSRhuGD1FPLbMSkd7BD9AFvF";
+export const API_KEY = "BRGhOkndXrFVD5ddwQeKVng9hvF9g07x";
 
 export const API_LANGUAGE = "en-us";
 

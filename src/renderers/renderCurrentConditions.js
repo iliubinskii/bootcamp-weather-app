@@ -53,18 +53,21 @@ export function renderCurrentConditions(
           <button
             ${ELEMENT_DATA.toggleFavoriteButton}
             class="btn btn-light round-button"
+            title="Toggle favorite"
           >
             ${getFavoriteIcon()}
           </button>
           <button
             ${ELEMENT_DATA.toggleMetricButton}
             class="btn btn-light round-button"
+            title="Toggle between Celsius and Fahrenheit"
           >
             <i class="fa-solid fa-lg">${metric ? "°C" : "°F"}</i>
           </button>
           <button
             ${ELEMENT_DATA.reloadButton}
             class="btn btn-light round-button"
+            title="Reload data"
           >
             <i class="fa-solid fa-rotate-right fa-lg"></i>
           </button>

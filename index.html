@@ -1,8 +1,7 @@
 <!--
 TODO
+- Modal or toast alerts
 - Scrollbar shifts content
-- Tooltips for buttons
-- Toggle dev mode
 -->
 
 <!doctype html>
@@ -29,15 +28,24 @@ TODO
       >
         <h1 class="fs-2">Weather</h1>
         <div class="d-flex gap-2">
-          <button data-weather-report-link class="btn btn-primary round-button">
+          <button
+            data-weather-report-link
+            class="btn btn-primary round-button"
+            title="View weather report"
+          >
             <i class="fa-solid fa-chart-simple fa-lg"></i>
           </button>
-          <button data-favorites-link class="btn btn-primary round-button">
+          <button
+            data-favorites-link
+            class="btn btn-primary round-button"
+            title="Favorites"
+          >
             <i class="fa-solid fa-heart fa-lg"></i>
           </button>
           <button
             data-toggle-dev-mode-button
             class="btn btn-primary round-button"
+            title="Toggle dev mode"
           >
             <i class="fa-solid fa-gear fa-lg"></i>
           </button>
