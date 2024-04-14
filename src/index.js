@@ -55,7 +55,7 @@ weatherReportLinkEl.addEventListener("click", async () => {
   try {
     await openWeatherReport(location);
   } catch (error) {
-    onError(`Failed to load weather data for ${location.LocalizedName}`);
+    onError(`Failed to load weather data for ${location.LocalizedName}.`);
     throw error;
   } finally {
     weatherReportLinkEl.removeAttribute("disabled");
@@ -147,7 +147,7 @@ function init() {
 
   // eslint-disable-next-line @typescript-eslint/no-floating-promises -- Ok
   openWeatherReport(location).catch(error => {
-    onError(`Failed to load weather data for ${location.LocalizedName}`);
+    onError(`Failed to load weather data for ${location.LocalizedName}.`);
     throw error;
   });
 }
@@ -159,7 +159,7 @@ function renderDevModeAlert() {
     const newElement = document.createElement("div");
 
     newElement.setAttribute(ELEMENT_DATA.devModeAlert, "");
-    newElement.className = "alert alert-info";
+    newElement.className = "alert alert-info mb-0";
     newElement.innerText = `Running in development mode. Available search queries: "Tel", "Tel Aviv", "Timbuktu". Use "Cog" button at the top-right corner to toggle development mode.`;
 
     searchForLocationEl.insertAdjacentElement("afterend", newElement);

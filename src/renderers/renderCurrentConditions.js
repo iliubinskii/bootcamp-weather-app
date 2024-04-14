@@ -106,7 +106,7 @@ export function renderCurrentConditions(
       setMetric(!metric);
       await rerender();
     } catch (error) {
-      onError(`Failed to load weather data for ${location.LocalizedName}`);
+      onError(`Failed to load weather data for ${location.LocalizedName}.`);
       throw error;
     }
   });
@@ -121,7 +121,7 @@ export function renderCurrentConditions(
     try {
       await rerender();
     } catch (error) {
-      onError(`Failed to load weather data for ${location.LocalizedName}`);
+      onError(`Failed to load weather data for ${location.LocalizedName}.`);
       throw error;
     }
   });

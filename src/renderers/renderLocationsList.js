@@ -64,7 +64,7 @@ export function renderLocationsList(
       try {
         await onSelectLocation(location);
       } catch (error) {
-        onError(`Failed to load weather data for ${location.LocalizedName}`);
+        onError(`Failed to load weather data for ${location.LocalizedName}.`);
         throw error;
       }
     });
