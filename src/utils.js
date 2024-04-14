@@ -1,4 +1,4 @@
-import { API_ENDPOINT } from "./consts.js";
+import { API_ENDPOINT, TEST_DELAY_MS } from "./consts.js";
 
 /**
  * @template T
@@ -30,6 +30,19 @@ export function assertNotNull(value) {
   if (value === null) throw Error("Value is null");
 
   return value;
+}
+
+/**
+ * @template T
+ * @param {T} value
+ * @returns {Promise<T>}
+ */
+export function delayedResolve(value) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve(value);
+    }, TEST_DELAY_MS);
+  });
 }
 
 /**

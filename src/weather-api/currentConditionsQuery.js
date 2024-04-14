@@ -1,5 +1,5 @@
+import { assertDefined, delayedResolve } from "../utils.js";
 import { DEV_MODE } from "../consts.js";
-import { assertDefined } from "../utils.js";
 import { mockResponses } from "../mocks/index.js";
 
 /**
@@ -11,7 +11,7 @@ export async function currentConditionsQuery(key) {
     const location = assertDefined(mockResponses.autocomplete.singleResult[0]);
 
     if (location.Key === key)
-      return Promise.resolve(
+      return delayedResolve(
         assertDefined(mockResponses.currentConditions.minimal[0])
       );
 
@@ -20,17 +20,12 @@ export async function currentConditionsQuery(key) {
     );
 
     if (locationAlt.Key === key)
-      return Promise.resolve(
+      return delayedResolve(
         assertDefined(mockResponses.currentConditions.minimalAlt[0])
       );
 
     return Promise.reject(`Unknown key ${key}`);
   }
 
-  /*
-  TODO
-  - Write real query
-  - Figure out why this API returns an array and how to handle it
-  */
   return Promise.reject("Not implemented");
 }
