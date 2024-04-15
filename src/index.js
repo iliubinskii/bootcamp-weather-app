@@ -133,8 +133,8 @@ searchForLocationEl.addEventListener("submit", async event => {
       searchForLocationButtonEl.removeAttribute("disabled");
       searchForLocationInputEl.removeAttribute("disabled");
       searchForLocationButtonEl.innerHTML = /*html*/ `
-          <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-        `;
+        <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+      `;
     }
   } else renderErrorMessage(pageContainerEl, "Please enter a location.");
 });
@@ -145,7 +145,6 @@ renderDevModeAlert();
 function init() {
   const { location } = getAppState();
 
-  // eslint-disable-next-line @typescript-eslint/no-floating-promises -- Ok
   openWeatherReport(location).catch(error => {
     onError(`Failed to load weather data for ${location.LocalizedName}.`);
     throw error;
